@@ -29,18 +29,12 @@ const SEED_MESSAGES: Message[] = [
 ]
 
 const SUGGESTED_PROMPTS = [
-  "What's the minimum bearing for a floor joist?",
-  'How do I calculate concrete for a 6x4 slab at 100mm?',
-  'What fixing schedule for LVL ridge beam to wall frame?',
+  "What's the minimum bearing for a triple LVL beam?",
+  'How much concrete for a 6×9 slab at 100mm deep?',
+  'What are the bracing requirements for a single storey timber frame?',
 ]
 
 const MAX_VISIBLE = 6
-
-function buildContext(msgs: Message[]): string | undefined {
-  const lines = msgs.map((m) => `${m.role === 'user' ? 'User' : 'Nudge'}: ${m.content}`)
-  if (lines.length === 0) return undefined
-  return `Landing page demo conversation:\n${lines.join('\n\n')}`
-}
 
 export function NudgeDemo() {
   const [messages, setMessages] = useState<Message[]>(SEED_MESSAGES)
@@ -71,11 +65,10 @@ export function NudgeDemo() {
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: trimmed,
-          jobContext: buildContext(messages),
-        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: trimmed }),
       })
       const data = await res.json()
       if (!res.ok || data.error) {
@@ -102,7 +95,7 @@ export function NudgeDemo() {
     <div className="w-full max-w-[380px] mx-auto">
       <div className="overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="border-b border-[var(--color-border)] px-4 py-3">
-          <p className="font-display text-xs font-bold text-white">Bang On</p>
+          <p className="font-display text-xs font-bold text-white">datum.ai</p>
           <p className="font-body text-sm text-[var(--color-text-muted)]">Ask Nudge</p>
         </div>
 

@@ -1,15 +1,19 @@
 import { motion } from 'framer-motion'
 import {
   Banknote,
+  BookOpen,
+  ClipboardList,
   FileText,
   Image as ImageIcon,
   ReceiptText,
   Ruler,
   ScanLine,
+  Shield,
 } from 'lucide-react'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { StatsBar } from './components/StatsBar'
+import { FeatureCallouts } from './components/FeatureCallouts'
 import { SectionLabel } from './components/SectionLabel'
 import { NudgeDemo } from './components/NudgeDemo'
 import {
@@ -28,11 +32,12 @@ const fadeUp = {
 }
 
 const painPoints = [
-  'Quotes take hours to write up',
-  'Job notes live in text threads',
-  "Can't remember what AS 1684 says",
-  'Site photos are scattered everywhere',
-  'Invoices get sent late — or not at all',
+  'No single place to manage jobs end to end',
+  'Quotes and invoices take too long',
+  "AI tools that don't know the trade",
+  'Site photos scattered across text threads',
+  'Client updates that take forever to write',
+  'Apps built for offices, not worksites',
 ]
 
 function ProblemSection() {
@@ -49,17 +54,14 @@ function ProblemSection() {
         >
           <SectionLabel>THE PROBLEM</SectionLabel>
           <h2 className="font-display text-[32px] font-bold leading-tight text-white md:text-[40px]">
-            Tradies are running multi-hundred-thousand dollar jobs with a notepad and a
-            phone call.
+            Tradies deserve better tools.
           </h2>
-          <p className="font-body text-base leading-6 text-[var(--color-text-muted)]">
-            There&apos;s no shortage of tradie apps. But most are built by software people
-            who&apos;ve never set foot on a slab. They&apos;re clunky, slow, and designed
-            for an office, not a worksite.
-            <br />
-            <br />
-            Bang On is different. Built from the ground up with tradies. Fast enough to use
-            with dirty hands. Smart enough to actually help.
+          <p className="whitespace-pre-line font-body text-base leading-7 text-[var(--color-text-muted)]">
+            {`Running a building job means managing clients, crew, subcontractors, cashflow, compliance, and a hundred moving parts — all at once, often from a muddy worksite with one bar of signal.
+
+The apps built to help? Clunky. Desktop-first. Designed by people who've never set foot on a slab. They solve one problem and ignore the rest.
+
+datum.ai is different. One app that connects the job, the cash, the crew, and the site. AI that actually understands the trade. Built for the conditions tradies work in every day.`}
           </p>
         </motion.div>
 
@@ -90,7 +92,7 @@ function ProblemSection() {
 
 function NudgeSection() {
   return (
-    <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
+    <section id="nudge" className="px-6 py-[60px] md:px-12 md:py-[120px]">
       <div className="mx-auto max-w-[1100px]">
         <motion.div
           className="flex flex-col items-center text-center"
@@ -107,15 +109,16 @@ function NudgeSection() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="mt-6 font-display text-[36px] font-bold text-white md:text-[48px]"
           >
-            Ask anything. Get an answer in seconds.
+            Site knowledge. On demand.
           </motion.h2>
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mt-4 max-w-[560px] font-body text-base text-[var(--color-text-muted)]"
+            className="mt-4 max-w-[600px] font-body text-base text-[var(--color-text-muted)]"
           >
-            Nudge knows the NCC, AS 1684, timber framing, concrete, roofing, and everything
-            in between. Try it.
+            Nudge knows Australian building standards, timber framing, concrete, roofing,
+            NCC compliance, and more. Whatever the trade, whatever the problem — ask Nudge
+            and get a straight answer.
           </motion.p>
         </motion.div>
 
@@ -170,7 +173,7 @@ function FinalCta() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mt-4 max-w-[480px] font-body text-base text-[var(--color-text-muted)]"
         >
-          Bang On is coming to iPhone and Android. Join the waitlist and be first to know
+          datum.ai is coming to iPhone and Android. Join the waitlist and be first to know
           when we launch.
         </motion.p>
         <motion.div
@@ -201,12 +204,14 @@ export default function App() {
         <div id="stats">
           <StatsBar />
         </div>
+        <FeatureCallouts />
         <ProblemSection />
         <NudgeSection />
         <FeatureSection
+          id="snap"
           label="SNAP"
           headline="Point. Snap. Done."
-          body="Take a photo of anything on site — a connection detail, a crack, a plan, a material. Bang On reads it and tells you exactly what you need to know.
+          body="Take a photo of anything on site — a connection detail, a crack, a plan, a material. datum.ai reads it and tells you exactly what you need to know.
 
 Identify issues before they become problems. Get NCC-aware advice in seconds. No more calling the engineer for something you could've solved on the spot."
           features={[
@@ -220,20 +225,28 @@ Identify issues before they become problems. Get NCC-aware advice in seconds. No
           <SnapMockup />
         </FeatureSection>
         <FeatureSection
+          id="jobs"
           label="JOBS"
           headline="Every job. In one place."
-          body="Create a job, add your client details, and Bang On builds a living timeline as the work progresses. Notes, photos, quotes, client updates — all in one place, in the order they happened.
+          body={`Create a job, add your client, and datum.ai builds a living timeline as the work progresses. Notes, photos, quotes, invoices, and site reports — all in one place, in the order they happened.
 
-Ask Nudge about the job specifically. It knows the client, the address, the status, and the history. Like having a site manager in your pocket."
+Ask Nudge about the job specifically. It knows the client, the address, the status, and what's happened on site. Need to update your client? Nudge writes it. Need to send a site report, quote, or invoice? One tap.
+
+Add your crew to the job and keep everyone across what's happening — subbies, foremen, and site supervisors all on the same page.`}
+          bodyClassName="leading-7"
           features={[
-            'Job timeline with notes, photos, and documents',
-            'AI that knows your job context',
-            'Client details and contact history',
+            'Living job timeline — notes, photos, quotes, invoices',
+            'Nudge polishes your client updates automatically',
+            'Share reports, quotes and invoices with one tap',
+            'Add your crew and keep everyone across the job',
           ]}
           imagePosition="right"
           mockupLabel="Job detail screen coming soon"
         />
-        <section className="bg-[var(--color-surface)] px-6 py-[60px] md:px-12 md:py-[120px]">
+        <section
+          id="money"
+          className="bg-[var(--color-surface)] px-6 py-[60px] md:px-12 md:py-[120px]"
+        >
           <div className="mx-auto max-w-[1100px]">
             <motion.div
               className="flex flex-col items-center text-center"
@@ -248,42 +261,45 @@ Ask Nudge about the job specifically. It knows the client, the address, the stat
               <motion.h2
                 variants={fadeUp}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="mt-6 font-display text-[36px] font-bold text-white md:text-[48px]"
+                className="mt-6 whitespace-nowrap font-display text-[36px] font-bold text-white md:text-[48px]"
               >
-                Quotes in seconds. Invoices on the spot.
+                Quotes. Invoices. Cashflow.
               </motion.h2>
               <motion.p
                 variants={fadeUp}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="mt-4 max-w-[560px] font-body text-base text-[var(--color-text-muted)]"
+                className="mt-4 max-w-[580px] font-body text-base text-[var(--color-text-muted)]"
               >
-                Describe the scope of work and Bang On writes the quote. Line items, GST,
-                totals — done. Convert it to an invoice when the job&apos;s complete. Track
-                what&apos;s outstanding, what&apos;s overdue, and what&apos;s been paid.
+                Describe the scope and Nudge writes the quote. Convert it to an invoice when
+                the job&apos;s done. Track what&apos;s outstanding, chase what&apos;s overdue,
+                and know exactly where you stand — all from your phone.
               </motion.p>
             </motion.div>
             <MoneyCards
               cards={[
                 {
+                  icon: Banknote,
+                  title: 'Money dashboard',
+                  body: 'Outstanding, overdue, paid this month. Your cashflow at a glance — no spreadsheet needed.',
+                },
+                {
                   icon: ReceiptText,
                   title: 'Quotes',
-                  body: 'Describe the job. Nudge writes the quote.',
+                  body: 'Describe the job. Nudge writes the quote. Line items, GST, totals — done in seconds.',
                 },
                 {
                   icon: FileText,
                   title: 'Invoices',
-                  body: 'Convert any quote to an invoice in one tap.',
-                },
-                {
-                  icon: Banknote,
-                  title: 'Money dashboard',
-                  body: 'Outstanding, overdue, paid. At a glance.',
+                  body: "Convert any quote to an invoice in one tap. Send payment reminders to clients when they're overdue.",
                 },
               ]}
             />
           </div>
         </section>
-        <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
+        <section
+          id="toolbox"
+          className="px-6 py-[60px] md:px-12 md:py-[120px]"
+        >
           <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <PhoneMockup label="Toolbox screen coming soon" />
             <motion.div
@@ -299,33 +315,48 @@ Ask Nudge about the job specifically. It knows the client, the address, the stat
                 The tools you reach for every day.
               </h2>
               <p className="font-body text-base text-[var(--color-text-muted)]">
-                Measure, calculate, estimate, report. Bang On&apos;s toolbox has the things
-                you actually need on site — not a hundred features you&apos;ll never use.
+                datum.ai&apos;s toolbox has the things tradies actually need on site — not a
+                hundred features you&apos;ll never use. And if something&apos;s missing,
+                suggest it. We&apos;re building this with the trade, and the best ideas come
+                from the tools.
               </p>
               <ToolboxList
                 items={[
                   {
                     icon: Ruler,
                     name: 'Measure & calculate',
-                    description: 'Concrete, timber, roof pitch — offline.',
-                  },
-                  {
-                    icon: ReceiptText,
-                    name: 'Quick quote',
-                    description: 'A quote without opening a job.',
+                    description:
+                      'Concrete, timber, roof pitch — works offline, no signal needed.',
                   },
                   {
                     icon: ImageIcon,
                     name: 'Photo report',
-                    description: 'Select photos, Nudge writes the report.',
+                    description:
+                      'Select site photos, Nudge writes the progress report. Client-ready in seconds.',
                   },
                   {
-                    icon: FileText,
-                    name: 'Invoice',
-                    description: 'Bill your client on the spot.',
+                    icon: Shield,
+                    name: 'SWMS generator',
+                    description:
+                      'Describe the high-risk work, Nudge drafts your Safe Work Method Statement. Coming soon.',
+                  },
+                  {
+                    icon: ClipboardList,
+                    name: 'Defect report',
+                    description:
+                      'Document and photograph defects on site. Exportable report. Coming soon.',
+                  },
+                  {
+                    icon: BookOpen,
+                    name: 'Building codes',
+                    description:
+                      'State-by-state building code library. Plain language, fast lookup. Coming soon.',
                   },
                 ]}
               />
+              <p className="font-body text-[13px] italic text-[var(--color-text-muted)]">
+                Got a tool idea? Suggest it — we add the best ones to the backlog.
+              </p>
             </motion.div>
           </div>
         </section>

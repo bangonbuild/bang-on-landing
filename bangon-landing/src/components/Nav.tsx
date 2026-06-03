@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 
+const navLinks = [
+  { label: 'Ask Nudge', href: '#nudge' },
+  { label: 'Snap', href: '#snap' },
+  { label: 'Jobs', href: '#jobs' },
+  { label: 'Money', href: '#money' },
+  { label: 'Toolbox', href: '#toolbox' },
+]
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
 
@@ -20,26 +28,30 @@ export function Nav() {
         scrolled ? 'border-b border-[var(--color-border)]' : 'border-b border-transparent'
       }`}
     >
-      <div className="mx-auto flex h-full max-w-[1100px] items-center justify-between px-6 md:px-12">
+      <div className="relative mx-auto flex h-full max-w-[1100px] items-center justify-between px-6 md:px-12">
         <a href="#" className="font-display text-lg font-bold text-white">
-          Bang On
+          datum.ai
         </a>
-        <div className="flex items-center gap-4 md:gap-6">
-          <button
-            type="button"
-            onClick={scrollToWaitlist}
-            className="hidden font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-white md:block"
-          >
-            Sign up
-          </button>
-          <button
-            type="button"
-            onClick={scrollToWaitlist}
-            className="h-8 rounded-lg bg-white px-4 font-display text-[13px] font-medium text-black transition-opacity hover:opacity-90"
-          >
-            Join waitlist
-          </button>
+
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
+
+        <button
+          type="button"
+          onClick={scrollToWaitlist}
+          className="h-8 rounded-lg bg-white px-4 font-display text-[13px] font-medium text-black transition-opacity hover:opacity-90"
+        >
+          Join waitlist
+        </button>
       </div>
     </nav>
   )

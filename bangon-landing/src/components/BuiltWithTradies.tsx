@@ -15,13 +15,13 @@ const cards = [
   },
   {
     icon: Pencil,
-    title: 'Designed for dirty hands',
-    body: 'Every screen was designed for a 5-inch phone screen, in bright sunlight, with one hand. Fast, clear, and minimal. No forms. No faff. No learning curve.',
+    title: 'Designed for site conditions',
+    body: 'Every screen was designed for a phone in bright sunlight, with dirty hands, one bar of signal. Fast, clear, and minimal. No forms. No faff. No learning curve.',
   },
   {
     icon: CheckCircle,
     title: 'Tested in the real world',
-    body: "Before launch, Bang On was tested across residential builds, commercial fit-outs, and concrete pours. If it didn't work on site, it didn't ship.",
+    body: "Before launch, datum.ai was tested across residential builds, commercial fit-outs, and concrete pours. If it didn't work on site, it didn't ship.",
   },
 ]
 
@@ -51,8 +51,8 @@ export function BuiltWithTradies() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="mt-4 max-w-[600px] font-body text-base text-[var(--color-text-muted)]"
           >
-            Bang On wasn&apos;t built in an office. Every feature started with a real
-            problem, raised by real tradies, tested in real conditions.
+            Every feature started with a real problem, raised by real tradies, tested in
+            real conditions.
           </motion.p>
         </motion.div>
 
@@ -78,6 +78,19 @@ export function BuiltWithTradies() {
           ))}
         </div>
 
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          variants={fadeUp}
+          className="mx-auto mt-12 max-w-[700px] text-center font-body text-base leading-7 text-[var(--color-text-muted)]"
+        >
+          datum.ai will keep evolving. Every update is shaped by feedback from tradies on
+          the tools — what&apos;s working, what&apos;s missing, and what would make the
+          biggest difference on site. If you&apos;ve got an idea, we want to hear it.
+        </motion.p>
+
         <motion.blockquote
           initial="hidden"
           whileInView="visible"
@@ -91,7 +104,7 @@ export function BuiltWithTradies() {
             actually thinks like a tradie.&rdquo;
           </p>
           <footer className="mt-4 font-body text-sm text-[var(--color-text-muted)]">
-            — Site supervisor, residential construction
+            — Greg, site supervisor, residential construction
           </footer>
         </motion.blockquote>
       </div>

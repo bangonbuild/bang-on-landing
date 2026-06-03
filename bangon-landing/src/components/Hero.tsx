@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
 import { SectionLabel } from './SectionLabel'
 import { WaitlistForm } from './WaitlistForm'
 
@@ -26,22 +25,24 @@ export function Hero() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mt-8 font-display text-[48px] font-bold leading-[1.05] tracking-tight text-white md:text-[80px]"
         >
-          Bang On.
-          <br />
-          <span className="text-[var(--color-text-muted)]">
-            The smartest tool
-            <br />
-            on site.
-          </span>
+          datum.ai
         </motion.h1>
+
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mt-2 font-display text-[28px] font-bold leading-tight text-[var(--color-text-muted)] md:text-[40px]"
+        >
+          The smartest tool on site.
+        </motion.p>
 
         <motion.p
           variants={fadeUp}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mt-6 max-w-[520px] font-body text-lg text-[var(--color-text-muted)]"
         >
-          Built for builders, carpenters, and site supervisors. AI on tap — for quotes,
-          jobs, site reads, and everything in between.
+          Built for tradies, with tradies. Job management, AI tools, cashflow and your crew
+          — all in one place.
         </motion.p>
 
         <motion.div
@@ -53,14 +54,6 @@ export function Hero() {
           <WaitlistForm variant="hero" />
         </motion.div>
       </motion.div>
-
-      <a
-        href="#stats"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[var(--color-text-dim)] animate-bounce-subtle"
-        aria-label="Scroll down"
-      >
-        <ChevronDown className="h-6 w-6" strokeWidth={1.5} />
-      </a>
     </section>
   )
 }

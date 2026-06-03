@@ -10,6 +10,7 @@ const fadeUp = {
 }
 
 interface FeatureSectionProps {
+  id?: string
   label: string
   headline: string
   body: string
@@ -17,10 +18,12 @@ interface FeatureSectionProps {
   imagePosition?: 'left' | 'right'
   mockupLabel?: string
   centred?: boolean
+  bodyClassName?: string
   children?: ReactNode
 }
 
 export function FeatureSection({
+  id,
   label,
   headline,
   body,
@@ -28,6 +31,7 @@ export function FeatureSection({
   imagePosition = 'right',
   mockupLabel,
   centred = false,
+  bodyClassName = 'leading-relaxed',
   children,
 }: FeatureSectionProps) {
   const textBlock = (
@@ -43,7 +47,9 @@ export function FeatureSection({
       <h2 className="font-display text-[32px] font-bold leading-tight text-white md:text-[40px]">
         {headline}
       </h2>
-      <p className="whitespace-pre-line font-body text-base leading-relaxed text-[var(--color-text-muted)]">
+      <p
+        className={`whitespace-pre-line font-body text-base text-[var(--color-text-muted)] ${bodyClassName}`}
+      >
         {body}
       </p>
       {features && (
@@ -73,14 +79,14 @@ export function FeatureSection({
 
   if (centred) {
     return (
-      <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
+      <section id={id} className="px-6 py-[60px] md:px-12 md:py-[120px]">
         <div className="mx-auto max-w-[1100px]">{textBlock}</div>
       </section>
     )
   }
 
   return (
-    <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
+    <section id={id} className="px-6 py-[60px] md:px-12 md:py-[120px]">
       <div
         className={`mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
           imagePosition === 'left' ? '' : ''
