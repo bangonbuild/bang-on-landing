@@ -41,7 +41,7 @@ export function FeatureSection({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       variants={fadeUp}
-      className={`flex flex-col gap-6 ${centred ? 'items-center text-center' : ''}`}
+      className={`flex flex-col gap-6 ${centred ? 'items-center text-center' : 'items-start'}`}
     >
       <SectionLabel>{label}</SectionLabel>
       <h2 className="font-display text-[32px] font-bold leading-tight text-white md:text-[40px]">
@@ -86,9 +86,9 @@ export function FeatureSection({
   }
 
   return (
-    <section id={id} className="px-6 py-[60px] md:px-12 md:py-[120px]">
+    <section id={id} className="overflow-hidden px-6 py-[60px] md:px-12 md:py-[120px]">
       <div
-        className={`mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
+        className={`mx-auto grid min-w-0 max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
           imagePosition === 'left' ? '' : ''
         }`}
       >

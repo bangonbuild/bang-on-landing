@@ -92,7 +92,7 @@ export function NudgeDemo() {
   }
 
   return (
-    <div className="w-full max-w-[380px] mx-auto">
+    <div className="mx-auto w-full min-w-0 max-w-[380px]">
       <div className="overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="border-b border-[var(--color-border)] px-4 py-3">
           <p className="font-display text-xs font-bold text-white">datum.ai</p>

@@ -54,12 +54,12 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/80 p-4"
       onClick={onClose}
       role="presentation"
     >
       <div
-        className="relative w-full max-w-[480px] rounded-2xl border border-[var(--color-border-2)] bg-[var(--color-surface)] p-8"
+        className="relative my-auto w-[calc(100%-32px)] max-h-[90vh] max-w-[480px] overflow-y-auto rounded-2xl border border-[var(--color-border-2)] bg-[var(--color-surface)] p-6 sm:m-4 sm:p-8"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -88,7 +88,7 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
           <>
             <h2
               id="suggest-tool-title"
-              className="font-display text-[22px] font-bold text-white"
+              className="pr-8 font-display text-[22px] font-bold text-white"
             >
               Suggest a tool
             </h2>
@@ -96,30 +96,30 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
               We&apos;re building datum.ai with tradies. Tell us what you need.
             </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} className="flex w-full min-w-0 flex-col gap-4">
               <textarea
                 value={suggestion}
                 onChange={(e) => setSuggestion(e.target.value)}
                 placeholder="What tool would help you most on site?"
                 rows={4}
-                className="min-h-[100px] w-full resize-y rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-3 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
+                className="min-h-[100px] w-full min-w-0 resize-y rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-3 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
               />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="h-12 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
+                className="h-12 w-full min-w-0 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
               />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="h-12 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
+                className="h-12 w-full min-w-0 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
               />
-              <label className="flex cursor-pointer items-center justify-between gap-4">
-                <span className="font-body text-sm text-[var(--color-text-muted)]">
+              <label className="flex min-w-0 cursor-pointer items-center justify-between gap-4">
+                <span className="min-w-0 font-body text-sm text-[var(--color-text-muted)]">
                   Keep me updated on new tools
                 </span>
                 <button
@@ -143,7 +143,7 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
               )}
               <button
                 type="submit"
-                className="h-12 w-full rounded-xl bg-white font-body text-[15px] font-medium text-black transition-opacity hover:opacity-90"
+                className="h-12 w-full min-w-0 rounded-xl bg-white font-body text-[15px] font-medium text-black transition-opacity hover:opacity-90"
               >
                 Send suggestion
               </button>

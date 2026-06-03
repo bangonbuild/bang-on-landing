@@ -44,15 +44,15 @@ const painPoints = [
 
 function ProblemSection() {
   return (
-    <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
-      <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section className="overflow-hidden px-6 py-[60px] md:px-12 md:py-[120px]">
+      <div className="mx-auto grid min-w-0 max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           variants={fadeUp}
-          className="flex flex-col gap-6"
+          className="flex min-w-0 flex-col items-start gap-6"
         >
           <SectionLabel>THE PROBLEM</SectionLabel>
           <h2 className="font-display text-[32px] font-bold leading-tight text-white md:text-[40px]">
@@ -213,7 +213,7 @@ function ToolboxSection() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           variants={fadeUp}
-          className="flex flex-col gap-6"
+          className="flex flex-col items-start gap-6"
         >
           <SectionLabel>TOOLBOX</SectionLabel>
           <h2 className="font-display text-[32px] font-bold text-white md:text-[40px]">
@@ -276,8 +276,9 @@ export default function App() {
 
   return (
     <SuggestToolProvider openSuggestModal={() => setSuggestModalOpen(true)}>
+      <div className="w-full overflow-x-hidden">
       <Nav />
-      <main>
+      <main className="w-full min-w-0 overflow-x-hidden">
         <Hero />
         <ProblemSection />
         <FeatureCallouts />
@@ -342,7 +343,7 @@ Add your crew to the job and keep everyone across what's happening: subbies, for
               <motion.h2
                 variants={fadeUp}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="mt-6 whitespace-nowrap font-display text-[36px] font-bold text-white md:text-[48px]"
+                className="mt-6 max-w-full font-display text-[36px] font-bold leading-tight text-white md:text-[48px]"
               >
                 Quotes. Invoices. Cashflow.
               </motion.h2>
@@ -386,6 +387,7 @@ Add your crew to the job and keep everyone across what's happening: subbies, for
         open={suggestModalOpen}
         onClose={() => setSuggestModalOpen(false)}
       />
+      </div>
     </SuggestToolProvider>
   )
 }

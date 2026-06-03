@@ -6,7 +6,7 @@ interface PhoneMockupProps {
 
 export function PhoneMockup({ label = 'App screenshot coming soon' }: PhoneMockupProps) {
   return (
-    <div className="mx-auto w-full max-w-[390px]">
+    <div className="mx-auto w-full min-w-0 max-w-[390px]">
       <div
         className="relative flex aspect-[390/700] w-full flex-col items-center justify-center rounded-[40px] border-2 border-[var(--color-border)] bg-[var(--color-surface)] p-8"
         style={{

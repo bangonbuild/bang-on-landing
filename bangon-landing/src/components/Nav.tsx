@@ -33,7 +33,7 @@ export function Nav() {
           datum.ai
         </a>
 
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
+        <div className="absolute left-1/2 hidden max-w-[50%] -translate-x-1/2 items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
