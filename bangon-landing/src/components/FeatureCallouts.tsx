@@ -25,40 +25,40 @@ const cards: CalloutCard[] = [
     icon: MessageCircle,
     title: 'Ask Nudge',
     description:
-      'AI that knows the trade. Ask anything — NCC, AS standards, site problems, calculations. Get a straight answer in seconds.',
+      'AI that knows the trade. Ask anything: NCC, AS standards, site problems, calculations. Get a straight answer in seconds.',
   },
   {
     icon: ScanLine,
     title: 'Snap',
     description:
-      'Point your camera at any site problem. Nudge reads it and tells you what you need to know — before it becomes a bigger issue.',
+      'Point your camera at any site problem. Nudge reads it and tells you what you need to know, before it becomes a bigger issue.',
   },
   {
     icon: Briefcase,
     title: 'Jobs',
     description:
-      'Create a job, add your client, and build a living timeline as the work progresses. Notes, photos, quotes, and updates — all in one place.',
+      'Create a job, add your client, and build a living timeline as work progresses. Notes, photos, quotes and invoices, all in one place.',
   },
   {
     icon: Banknote,
     title: 'Money',
     description:
-      "Generate quotes and invoices in seconds. Track what's outstanding, what's overdue, and what's been paid — all from your phone.",
+      "Generate quotes and invoices in seconds. Track what's outstanding, what's overdue, and what's been paid, all from your phone.",
   },
   {
     icon: Users,
     title: 'Crew',
     description:
-      'Add your crew and link subbies to the same job. Shared updates, site reports, and team presence — built for how tradies actually work.',
+      'Add your crew and link subbies to the same job. Shared updates and team presence, built for how tradies work.',
   },
 ]
 
 function CalloutCardItem({ icon: Icon, title, description }: CalloutCard) {
   return (
-    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+    <div className="flex h-full flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
       <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
       <h3 className="mt-4 font-display text-lg font-bold text-white">{title}</h3>
-      <p className="mt-2 font-body text-sm leading-5 text-[var(--color-text-muted)]">
+      <p className="mt-2 min-h-[60px] font-body text-sm leading-5 text-[var(--color-text-muted)]">
         {description}
       </p>
     </div>
@@ -92,6 +92,7 @@ export function FeatureCallouts() {
           {cards.slice(0, 3).map((card, i) => (
             <motion.div
               key={card.title}
+              className="h-full"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -106,6 +107,7 @@ export function FeatureCallouts() {
           {cards.slice(3).map((card, i) => (
             <motion.div
               key={card.title}
+              className="h-full"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}

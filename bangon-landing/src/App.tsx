@@ -12,7 +12,6 @@ import {
 } from 'lucide-react'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
-import { StatsBar } from './components/StatsBar'
 import { FeatureCallouts } from './components/FeatureCallouts'
 import { SectionLabel } from './components/SectionLabel'
 import { NudgeDemo } from './components/NudgeDemo'
@@ -57,7 +56,7 @@ function ProblemSection() {
             Tradies deserve better tools.
           </h2>
           <p className="whitespace-pre-line font-body text-base leading-7 text-[var(--color-text-muted)]">
-            {`Running a building job means managing clients, crew, subcontractors, cashflow, compliance, and a hundred moving parts — all at once, often from a muddy worksite with one bar of signal.
+            {`Running a building job means managing clients, crew, subcontractors, cashflow, compliance, and a hundred moving parts, all at once, often from a muddy worksite with one bar of signal.
 
 The apps built to help? Clunky. Desktop-first. Designed by people who've never set foot on a slab. They solve one problem and ignore the rest.
 
@@ -117,7 +116,7 @@ function NudgeSection() {
             className="mt-4 max-w-[600px] font-body text-base text-[var(--color-text-muted)]"
           >
             Nudge knows Australian building standards, timber framing, concrete, roofing,
-            NCC compliance, and more. Whatever the trade, whatever the problem — ask Nudge
+            NCC compliance, and more. Whatever the trade, whatever the problem, ask Nudge
             and get a straight answer.
           </motion.p>
         </motion.div>
@@ -201,17 +200,14 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <div id="stats">
-          <StatsBar />
-        </div>
-        <FeatureCallouts />
         <ProblemSection />
+        <FeatureCallouts />
         <NudgeSection />
         <FeatureSection
           id="snap"
           label="SNAP"
           headline="Point. Snap. Done."
-          body="Take a photo of anything on site — a connection detail, a crack, a plan, a material. datum.ai reads it and tells you exactly what you need to know.
+          body="Take a photo of anything on site: a connection detail, a crack, a plan, a material. datum.ai reads it and tells you exactly what you need to know.
 
 Identify issues before they become problems. Get NCC-aware advice in seconds. No more calling the engineer for something you could've solved on the spot."
           features={[
@@ -228,14 +224,14 @@ Identify issues before they become problems. Get NCC-aware advice in seconds. No
           id="jobs"
           label="JOBS"
           headline="Every job. In one place."
-          body={`Create a job, add your client, and datum.ai builds a living timeline as the work progresses. Notes, photos, quotes, invoices, and site reports — all in one place, in the order they happened.
+          body={`Create a job, add your client, and datum.ai builds a living timeline as the work progresses. Notes, photos, quotes, invoices, and site reports, all in one place, in the order they happened.
 
 Ask Nudge about the job specifically. It knows the client, the address, the status, and what's happened on site. Need to update your client? Nudge writes it. Need to send a site report, quote, or invoice? One tap.
 
-Add your crew to the job and keep everyone across what's happening — subbies, foremen, and site supervisors all on the same page.`}
+Add your crew to the job and keep everyone across what's happening: subbies, foremen, and site supervisors all on the same page.`}
           bodyClassName="leading-7"
           features={[
-            'Living job timeline — notes, photos, quotes, invoices',
+            'Living job timeline: notes, photos, quotes, invoices',
             'Nudge polishes your client updates automatically',
             'Share reports, quotes and invoices with one tap',
             'Add your crew and keep everyone across the job',
@@ -272,7 +268,7 @@ Add your crew to the job and keep everyone across what's happening — subbies, 
               >
                 Describe the scope and Nudge writes the quote. Convert it to an invoice when
                 the job&apos;s done. Track what&apos;s outstanding, chase what&apos;s overdue,
-                and know exactly where you stand — all from your phone.
+                and know exactly where you stand, all from your phone.
               </motion.p>
             </motion.div>
             <MoneyCards
@@ -280,12 +276,12 @@ Add your crew to the job and keep everyone across what's happening — subbies, 
                 {
                   icon: Banknote,
                   title: 'Money dashboard',
-                  body: 'Outstanding, overdue, paid this month. Your cashflow at a glance — no spreadsheet needed.',
+                  body: 'Outstanding, overdue, paid this month. Your cashflow at a glance, no spreadsheet needed.',
                 },
                 {
                   icon: ReceiptText,
                   title: 'Quotes',
-                  body: 'Describe the job. Nudge writes the quote. Line items, GST, totals — done in seconds.',
+                  body: 'Describe the job. Nudge writes the quote. Line items, GST, totals, done in seconds.',
                 },
                 {
                   icon: FileText,
@@ -315,10 +311,9 @@ Add your crew to the job and keep everyone across what's happening — subbies, 
                 The tools you reach for every day.
               </h2>
               <p className="font-body text-base text-[var(--color-text-muted)]">
-                datum.ai&apos;s toolbox has the things tradies actually need on site — not a
-                hundred features you&apos;ll never use. And if something&apos;s missing,
-                suggest it. We&apos;re building this with the trade, and the best ideas come
-                from the tools.
+                From quick calculations to photo reports and compliance tools, the Toolbox
+                is built around the tasks that come up on site every day. Got something
+                missing? Suggest it. The best ideas come from the trade.
               </p>
               <ToolboxList
                 items={[
@@ -326,7 +321,7 @@ Add your crew to the job and keep everyone across what's happening — subbies, 
                     icon: Ruler,
                     name: 'Measure & calculate',
                     description:
-                      'Concrete, timber, roof pitch — works offline, no signal needed.',
+                      'Concrete, timber, roof pitch. Works offline, no signal needed.',
                   },
                   {
                     icon: ImageIcon,
@@ -354,9 +349,6 @@ Add your crew to the job and keep everyone across what's happening — subbies, 
                   },
                 ]}
               />
-              <p className="font-body text-[13px] italic text-[var(--color-text-muted)]">
-                Got a tool idea? Suggest it — we add the best ones to the backlog.
-              </p>
             </motion.div>
           </div>
         </section>

@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Pencil, Users } from 'lucide-react'
 import { SectionLabel } from './SectionLabel'
+import { SuggestToolModal } from './SuggestToolModal'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -11,7 +13,7 @@ const cards = [
   {
     icon: Users,
     title: 'Started with tradies',
-    body: 'We spent weeks on site — talking to builders, carpenters, concretors, and site supervisors. We asked what slowed them down. We watched how they worked. We took notes.',
+    body: 'We spent weeks on site, talking to builders, carpenters, concretors, and site supervisors. We asked what slowed them down. We watched how they worked. We took notes.',
   },
   {
     icon: Pencil,
@@ -26,6 +28,8 @@ const cards = [
 ]
 
 export function BuiltWithTradies() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
     <section className="bg-[var(--color-surface)] px-6 py-[60px] md:px-12 md:py-[120px]">
       <div className="mx-auto max-w-[1100px]">
@@ -87,9 +91,26 @@ export function BuiltWithTradies() {
           className="mx-auto mt-12 max-w-[700px] text-center font-body text-base leading-7 text-[var(--color-text-muted)]"
         >
           datum.ai will keep evolving. Every update is shaped by feedback from tradies on
-          the tools — what&apos;s working, what&apos;s missing, and what would make the
+          the tools: what&apos;s working, what&apos;s missing, and what would make the
           biggest difference on site. If you&apos;ve got an idea, we want to hear it.
         </motion.p>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          variants={fadeUp}
+          className="mt-6 flex justify-center"
+        >
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="h-12 rounded-xl border border-[var(--color-border-2)] bg-[var(--color-surface-2)] px-6 font-body text-[15px] font-medium text-white transition-colors hover:border-[var(--color-text-muted)]"
+          >
+            Suggest a tool
+          </button>
+        </motion.div>
 
         <motion.blockquote
           initial="hidden"
@@ -100,14 +121,16 @@ export function BuiltWithTradies() {
           className="mx-auto mt-16 max-w-[700px] text-center"
         >
           <p className="font-display text-xl leading-relaxed text-white md:text-2xl">
-            &ldquo;I&apos;ve tried every tradie app out there. This is the first one that
+            &ldquo;I&apos;ve tried most tradie apps out there. This is the first one that
             actually thinks like a tradie.&rdquo;
           </p>
           <footer className="mt-4 font-body text-sm text-[var(--color-text-muted)]">
-            — Greg, site supervisor, residential construction
+            Greg, site supervisor, residential construction
           </footer>
         </motion.blockquote>
       </div>
+
+      <SuggestToolModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }

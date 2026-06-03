@@ -24,7 +24,7 @@ const SEED_MESSAGES: Message[] = [
     id: 'seed-3',
     role: 'nudge',
     content:
-      "Nah, don't do it. The middle third is the high-stress zone — notching there can cause failure under load. Stay in the outer quarters, and keep the depth under one-sixth of the joist depth. Check AS 1684.2 for your specific member size.",
+      "Nah, don't do it. The middle third is the high-stress zone. Notching there can cause failure under load. Stay in the outer quarters, and keep the depth under one-sixth of the joist depth. Check AS 1684.2 for your specific member size.",
   },
 ]
 
