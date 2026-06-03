@@ -1,8 +1,7 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle, Pencil, Users } from 'lucide-react'
 import { SectionLabel } from './SectionLabel'
-import { SuggestToolModal } from './SuggestToolModal'
+import { useSuggestTool } from '../context/SuggestToolContext'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -28,7 +27,7 @@ const cards = [
 ]
 
 export function BuiltWithTradies() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const { openSuggestModal } = useSuggestTool()
 
   return (
     <section className="bg-[var(--color-surface)] px-6 py-[60px] md:px-12 md:py-[120px]">
@@ -105,7 +104,7 @@ export function BuiltWithTradies() {
         >
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={openSuggestModal}
             className="h-12 rounded-xl border border-[var(--color-border-2)] bg-[var(--color-surface-2)] px-6 font-body text-[15px] font-medium text-white transition-colors hover:border-[var(--color-text-muted)]"
           >
             Suggest a tool
@@ -129,8 +128,6 @@ export function BuiltWithTradies() {
           </footer>
         </motion.blockquote>
       </div>
-
-      <SuggestToolModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }

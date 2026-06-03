@@ -33,9 +33,9 @@ export function Hero() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mt-2 font-display text-[28px] font-bold leading-tight text-[var(--color-text-muted)] md:text-[40px]"
+            className="mt-2 whitespace-nowrap font-display text-[clamp(1.375rem,5.5vw,2.5rem)] font-bold leading-tight text-[var(--color-text-muted)]"
           >
-            The smartest tool on site.
+            The smartest tool on{'\u00A0'}site.
           </motion.p>
 
           <motion.p

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Banknote,
@@ -24,6 +25,8 @@ import { PhoneMockup } from './components/PhoneMockup'
 import { BuiltWithTradies } from './components/BuiltWithTradies'
 import { WaitlistForm } from './components/WaitlistForm'
 import { Footer } from './components/Footer'
+import { SuggestToolModal } from './components/SuggestToolModal'
+import { SuggestToolProvider, useSuggestTool } from './context/SuggestToolContext'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -194,9 +197,85 @@ function FinalCta() {
   )
 }
 
-export default function App() {
+function ToolboxSection() {
+  const { openSuggestModal } = useSuggestTool()
+
   return (
-    <>
+    <section
+      id="toolbox"
+      className="px-6 py-[60px] md:px-12 md:py-[120px]"
+    >
+      <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <PhoneMockup label="Toolbox screen coming soon" />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          variants={fadeUp}
+          className="flex flex-col gap-6"
+        >
+          <SectionLabel>TOOLBOX</SectionLabel>
+          <h2 className="font-display text-[32px] font-bold text-white md:text-[40px]">
+            The tools you reach for every day.
+          </h2>
+          <p className="font-body text-base text-[var(--color-text-muted)]">
+            From quick calculations to photo reports and compliance tools, the Toolbox is
+            built around the tasks that come up on site every day. Got something missing?{' '}
+            <button
+              type="button"
+              onClick={openSuggestModal}
+              className="cursor-pointer text-white underline-offset-2 hover:underline"
+            >
+              Suggest it
+            </button>
+            . The best ideas come from the trade.
+          </p>
+          <ToolboxList
+            items={[
+              {
+                icon: Ruler,
+                name: 'Measure & calculate',
+                description:
+                  'Concrete, timber, roof pitch. Works offline, no signal needed.',
+              },
+              {
+                icon: ImageIcon,
+                name: 'Photo report',
+                description:
+                  'Select site photos, Nudge writes the progress report. Client-ready in seconds.',
+              },
+              {
+                icon: Shield,
+                name: 'SWMS generator',
+                description:
+                  'Describe the high-risk work, Nudge drafts your Safe Work Method Statement. Coming soon.',
+              },
+              {
+                icon: ClipboardList,
+                name: 'Defect report',
+                description:
+                  'Document and photograph defects on site. Exportable report. Coming soon.',
+              },
+              {
+                icon: BookOpen,
+                name: 'Building codes',
+                description:
+                  'State-by-state building code library. Plain language, fast lookup. Coming soon.',
+              },
+            ]}
+          />
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default function App() {
+  const [suggestModalOpen, setSuggestModalOpen] = useState(false)
+
+  return (
+    <SuggestToolProvider openSuggestModal={() => setSuggestModalOpen(true)}>
       <Nav />
       <main>
         <Hero />
@@ -223,7 +302,13 @@ Identify issues before they become problems. Get NCC-aware advice in seconds. No
         <FeatureSection
           id="jobs"
           label="JOBS"
-          headline="Every job. In one place."
+          headline={
+            <>
+              Every job.
+              <br />
+              In one place.
+            </>
+          }
           body={`Create a job, add your client, and datum.ai builds a living timeline as the work progresses. Notes, photos, quotes, invoices, and site reports, all in one place, in the order they happened.
 
 Ask Nudge about the job specifically. It knows the client, the address, the status, and what's happened on site. Need to update your client? Nudge writes it. Need to send a site report, quote, or invoice? One tap.
@@ -292,70 +377,15 @@ Add your crew to the job and keep everyone across what's happening: subbies, for
             />
           </div>
         </section>
-        <section
-          id="toolbox"
-          className="px-6 py-[60px] md:px-12 md:py-[120px]"
-        >
-          <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <PhoneMockup label="Toolbox screen coming soon" />
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              variants={fadeUp}
-              className="flex flex-col gap-6"
-            >
-              <SectionLabel>TOOLBOX</SectionLabel>
-              <h2 className="font-display text-[32px] font-bold text-white md:text-[40px]">
-                The tools you reach for every day.
-              </h2>
-              <p className="font-body text-base text-[var(--color-text-muted)]">
-                From quick calculations to photo reports and compliance tools, the Toolbox
-                is built around the tasks that come up on site every day. Got something
-                missing? Suggest it. The best ideas come from the trade.
-              </p>
-              <ToolboxList
-                items={[
-                  {
-                    icon: Ruler,
-                    name: 'Measure & calculate',
-                    description:
-                      'Concrete, timber, roof pitch. Works offline, no signal needed.',
-                  },
-                  {
-                    icon: ImageIcon,
-                    name: 'Photo report',
-                    description:
-                      'Select site photos, Nudge writes the progress report. Client-ready in seconds.',
-                  },
-                  {
-                    icon: Shield,
-                    name: 'SWMS generator',
-                    description:
-                      'Describe the high-risk work, Nudge drafts your Safe Work Method Statement. Coming soon.',
-                  },
-                  {
-                    icon: ClipboardList,
-                    name: 'Defect report',
-                    description:
-                      'Document and photograph defects on site. Exportable report. Coming soon.',
-                  },
-                  {
-                    icon: BookOpen,
-                    name: 'Building codes',
-                    description:
-                      'State-by-state building code library. Plain language, fast lookup. Coming soon.',
-                  },
-                ]}
-              />
-            </motion.div>
-          </div>
-        </section>
+        <ToolboxSection />
         <BuiltWithTradies />
         <FinalCta />
       </main>
       <Footer />
-    </>
+      <SuggestToolModal
+        open={suggestModalOpen}
+        onClose={() => setSuggestModalOpen(false)}
+      />
+    </SuggestToolProvider>
   )
 }

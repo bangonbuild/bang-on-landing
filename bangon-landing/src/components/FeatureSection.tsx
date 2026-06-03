@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import { Plug, type LucideIcon } from 'lucide-react'
 import { SectionLabel } from './SectionLabel'
 import { PhoneMockup } from './PhoneMockup'
 
@@ -12,7 +12,7 @@ const fadeUp = {
 interface FeatureSectionProps {
   id?: string
   label: string
-  headline: string
+  headline: ReactNode
   body: string
   features?: string[]
   imagePosition?: 'left' | 'right'
@@ -138,22 +138,28 @@ interface MoneyCard {
 
 export function MoneyCards({ cards }: { cards: MoneyCard[] }) {
   return (
-    <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
-      {cards.map(({ icon: Icon, title, body }) => (
-        <motion.div
-          key={title}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          variants={fadeUp}
-          className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-6"
-        >
-          <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
-          <h3 className="mt-4 font-display text-base font-bold text-white">{title}</h3>
-          <p className="mt-2 font-body text-sm text-[var(--color-text-muted)]">{body}</p>
-        </motion.div>
-      ))}
-    </div>
+    <>
+      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {cards.map(({ icon: Icon, title, body }) => (
+          <motion.div
+            key={title}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            variants={fadeUp}
+            className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-6"
+          >
+            <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
+            <h3 className="mt-4 font-display text-base font-bold text-white">{title}</h3>
+            <p className="mt-2 font-body text-sm text-[var(--color-text-muted)]">{body}</p>
+          </motion.div>
+        ))}
+      </div>
+      <p className="mt-4 flex items-center justify-center gap-2 font-body text-[13px] text-[var(--color-text-muted)]">
+        <Plug className="h-3.5 w-3.5 text-[var(--color-text-dim)]" strokeWidth={1.5} />
+        Xero and MYOB integrations coming soon.
+      </p>
+    </>
   )
 }
