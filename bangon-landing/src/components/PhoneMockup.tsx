@@ -15,7 +15,7 @@ export function PhoneMockup({ label = 'App screenshot coming soon' }: PhoneMocku
       >
         <div className="absolute inset-4 rounded-[32px] border border-[var(--color-border)] pointer-events-none" />
         <Smartphone className="relative z-10 h-12 w-12 text-[var(--color-text-dim)]" strokeWidth={1.25} />
-        <p className="relative z-10 mt-4 text-center font-body text-xs text-[var(--color-text-dim)]">
+        <p className="text-body relative z-10 mt-4 text-center text-[var(--color-text-dim)]">
           {label}
         </p>
       </div>

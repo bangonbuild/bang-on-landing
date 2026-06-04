@@ -9,10 +9,10 @@ const navLinks = [
 ]
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false)
+  const [sticky, setSticky] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setSticky(window.scrollY > 60)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -23,36 +23,44 @@ export function Nav() {
   }
 
   return (
-    <nav
-      className={`fixed top-0 z-50 w-full h-16 bg-[var(--color-bg)] transition-[border-color] ${
-        scrolled ? 'border-b border-[var(--color-border)]' : 'border-b border-transparent'
-      }`}
-    >
-      <div className="relative mx-auto flex h-full max-w-[1100px] items-center justify-between px-6 md:px-12">
-        <a href="#" className="font-display text-lg font-bold text-white">
-          datum.ai
-        </a>
-
-        <div className="absolute left-1/2 hidden max-w-[50%] -translate-x-1/2 items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-body text-sm text-[var(--color-text-muted)] transition-colors hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={scrollToWaitlist}
-          className="h-8 rounded-lg bg-white px-4 font-display text-[13px] font-medium text-black transition-opacity hover:opacity-90"
+    <>
+      <header
+        className={`z-50 w-full transition-all duration-300 ${
+          sticky ? 'fixed top-0 left-0 right-0' : 'relative'
+        }`}
+      >
+        <nav
+          className={`flex h-[72px] w-full items-center border-b transition-all duration-300 ${
+            sticky
+              ? 'border-[var(--color-border)] bg-[rgba(32,33,36,0.85)] backdrop-blur-[12px]'
+              : 'border-transparent bg-[var(--color-bg)]'
+          }`}
         >
-          Join waitlist
-        </button>
-      </div>
-    </nav>
+          <div className="site-container flex h-full w-full items-center justify-between gap-4">
+            <a href="#" className="text-body shrink-0 font-semibold text-white">
+              datum.ai
+            </a>
+
+            <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 lg:flex">
+              {navLinks.map((link) => (
+                <a key={link.href} href={link.href} className="nav-pill">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="flex shrink-0 items-center gap-2 md:gap-3">
+              <a href="#money" className="nav-action hidden sm:inline-flex">
+                Pricing
+              </a>
+              <button type="button" onClick={scrollToWaitlist} className="nav-action">
+                Join waitlist
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+      {sticky && <div className="h-[72px] shrink-0" aria-hidden />}
+    </>
   )
 }

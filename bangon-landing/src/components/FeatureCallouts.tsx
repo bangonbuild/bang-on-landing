@@ -1,23 +1,20 @@
 import { motion } from 'framer-motion'
+import type { LucideIcon } from 'lucide-react'
 import {
   Banknote,
   Briefcase,
   MessageCircle,
   ScanLine,
   Users,
-  type LucideIcon,
 } from 'lucide-react'
+import { PageSection } from './PageSection'
 import { SectionLabel } from './SectionLabel'
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-}
 
 interface CalloutCard {
   icon: LucideIcon
   title: string
   description: string
+  animation: 'pulse' | 'scan' | 'rotate' | 'bounce' | 'scale'
 }
 
 const cards: CalloutCard[] = [
@@ -26,99 +23,118 @@ const cards: CalloutCard[] = [
     title: 'Ask Nudge',
     description:
       'AI that knows the trade. Ask anything: NCC, AS standards, site problems, calculations. Get a straight answer in seconds.',
+    animation: 'pulse',
   },
   {
     icon: ScanLine,
     title: 'Snap',
     description:
       'Point your camera at any site problem. Nudge reads it and tells you what you need to know, before it becomes a bigger issue.',
+    animation: 'scan',
   },
   {
     icon: Briefcase,
     title: 'Jobs',
     description:
       'Create a job, add your client, and build a living timeline as work progresses. Notes, photos, quotes and invoices, all in one place.',
+    animation: 'rotate',
   },
   {
     icon: Banknote,
     title: 'Money',
     description:
       "Generate quotes and invoices in seconds. Track what's outstanding, what's overdue, and what's been paid, all from your phone.",
+    animation: 'bounce',
   },
   {
     icon: Users,
     title: 'Crew',
     description:
       'Add your crew and link subbies to the same job. Shared updates and team presence, built for how tradies work.',
+    animation: 'scale',
   },
 ]
 
-function CalloutCardItem({ icon: Icon, title, description }: CalloutCard) {
+function iconHoverProps(animation: CalloutCard['animation']) {
+  switch (animation) {
+    case 'pulse':
+      return {
+        whileHover: { scale: [1, 1.15, 1] },
+        whileTap: { scale: [1, 1.15, 1] },
+        transition: { duration: 0.4 },
+      }
+    case 'scan':
+      return {
+        whileHover: { x: [-4, 4, 0] },
+        whileTap: { x: [-4, 4, 0] },
+        transition: { duration: 0.5 },
+      }
+    case 'rotate':
+      return {
+        whileHover: { rotate: [-3, 3, 0] },
+        whileTap: { rotate: [-3, 3, 0] },
+        transition: { duration: 0.4 },
+      }
+    case 'bounce':
+      return {
+        whileHover: { y: [0, -6, 0] },
+        whileTap: { y: [0, -6, 0] },
+        transition: { duration: 0.4 },
+      }
+    case 'scale':
+      return {
+        whileHover: { scale: [1, 1.1, 1] },
+        whileTap: { scale: [1, 1.1, 1] },
+        transition: { duration: 0.4 },
+      }
+  }
+}
+
+function CalloutCardItem({ icon: Icon, title, description, animation, index }: CalloutCard & { index: number }) {
+  const iconMotion = iconHoverProps(animation)
+
   return (
-    <div className="flex h-full flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
-      <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
-      <h3 className="mt-4 font-display text-lg font-bold text-white">{title}</h3>
-      <p className="mt-2 min-h-[60px] font-body text-sm leading-5 text-[var(--color-text-muted)]">
-        {description}
-      </p>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
+      className="h-full"
+    >
+      <motion.div
+        className="flex h-full flex-col rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-colors duration-200 hover:border-[var(--color-border-2)] hover:bg-[var(--color-surface-2)]"
+        whileHover={{ y: -2 }}
+      >
+        <motion.div {...iconMotion} className="w-fit">
+          <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
+        </motion.div>
+        <h3 className="text-heading mt-4 text-white">{title}</h3>
+        <p className="text-body mt-2 min-h-[60px] text-[var(--color-text-muted)]">{description}</p>
+      </motion.div>
+    </motion.div>
   )
 }
 
 export function FeatureCallouts() {
   return (
-    <section className="px-6 py-[60px] md:px-12 md:py-[120px]">
-      <div className="mx-auto max-w-[1100px]">
-        <motion.div
-          className="flex flex-col items-center text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ staggerChildren: 0.1 }}
-        >
-          <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }}>
-            <SectionLabel>WHAT&apos;S INSIDE</SectionLabel>
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mt-6 font-display text-[36px] font-bold text-white md:text-[48px]"
-          >
-            Everything a tradie needs. Nothing they don&apos;t.
-          </motion.h2>
-        </motion.div>
-
-        <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {cards.slice(0, 3).map((card, i) => (
-            <motion.div
-              key={card.title}
-              className="h-full"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: i * 0.1 }}
-              variants={fadeUp}
-            >
-              <CalloutCardItem {...card} />
-            </motion.div>
-          ))}
-        </div>
-        <div className="mt-4 grid grid-cols-1 gap-4 md:mx-auto md:max-w-[66.666%] md:grid-cols-2">
-          {cards.slice(3).map((card, i) => (
-            <motion.div
-              key={card.title}
-              className="h-full"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: (i + 3) * 0.1 }}
-              variants={fadeUp}
-            >
-              <CalloutCardItem {...card} />
-            </motion.div>
-          ))}
-        </div>
+    <PageSection>
+      <div className="flex flex-col items-center text-center">
+        <SectionLabel className="self-center">WHAT&apos;S INSIDE</SectionLabel>
+        <h2 className="text-display mt-6 text-white">
+          Everything a tradie needs. Nothing they don&apos;t.
+        </h2>
       </div>
-    </section>
+
+      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {cards.slice(0, 3).map((card, i) => (
+          <CalloutCardItem key={card.title} {...card} index={i} />
+        ))}
+      </div>
+      <div className="mt-4 grid grid-cols-1 gap-4 md:mx-auto md:max-w-[66.666%] md:grid-cols-2">
+        {cards.slice(3).map((card, i) => (
+          <CalloutCardItem key={card.title} {...card} index={i + 3} />
+        ))}
+      </div>
+    </PageSection>
   )
 }

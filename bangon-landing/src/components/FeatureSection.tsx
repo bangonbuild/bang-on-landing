@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { Plug, type LucideIcon } from 'lucide-react'
+import { PageSection } from './PageSection'
 import { SectionLabel } from './SectionLabel'
 import { PhoneMockup } from './PhoneMockup'
 
@@ -18,8 +19,8 @@ interface FeatureSectionProps {
   imagePosition?: 'left' | 'right'
   mockupLabel?: string
   centred?: boolean
-  bodyClassName?: string
   children?: ReactNode
+  className?: string
 }
 
 export function FeatureSection({
@@ -31,8 +32,8 @@ export function FeatureSection({
   imagePosition = 'right',
   mockupLabel,
   centred = false,
-  bodyClassName = 'leading-relaxed',
   children,
+  className = '',
 }: FeatureSectionProps) {
   const textBlock = (
     <motion.div
@@ -44,18 +45,12 @@ export function FeatureSection({
       className={`flex flex-col gap-6 ${centred ? 'items-center text-center' : 'items-start'}`}
     >
       <SectionLabel>{label}</SectionLabel>
-      <h2 className="font-display text-[32px] font-bold leading-tight text-white md:text-[40px]">
-        {headline}
-      </h2>
-      <p
-        className={`whitespace-pre-line font-body text-base text-[var(--color-text-muted)] ${bodyClassName}`}
-      >
-        {body}
-      </p>
+      <h2 className="text-display text-white">{headline}</h2>
+      <p className="text-body whitespace-pre-line text-[var(--color-text-muted)]">{body}</p>
       {features && (
         <ul className={`flex flex-col gap-3 ${centred ? 'items-center' : ''}`}>
           {features.map((f) => (
-            <li key={f} className="font-body text-[15px] text-[var(--color-text-muted)]">
+            <li key={f} className="text-body text-[var(--color-text-muted)]">
               <span className="text-white">→ </span>
               {f.replace(/^→\s*/, '')}
             </li>
@@ -79,19 +74,15 @@ export function FeatureSection({
 
   if (centred) {
     return (
-      <section id={id} className="px-6 py-[60px] md:px-12 md:py-[120px]">
-        <div className="mx-auto max-w-[1100px]">{textBlock}</div>
-      </section>
+      <PageSection id={id} className={className}>
+        {textBlock}
+      </PageSection>
     )
   }
 
   return (
-    <section id={id} className="overflow-hidden px-6 py-[60px] md:px-12 md:py-[120px]">
-      <div
-        className={`mx-auto grid min-w-0 max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
-          imagePosition === 'left' ? '' : ''
-        }`}
-      >
+    <PageSection id={id} className={className}>
+      <div className="grid min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         {imagePosition === 'left' ? (
           <>
             {visualBlock}
@@ -104,7 +95,7 @@ export function FeatureSection({
           </>
         )}
       </div>
-    </section>
+    </PageSection>
   )
 }
 
@@ -121,8 +112,8 @@ export function ToolboxList({ items }: { items: ToolItem[] }) {
         <li key={name} className="flex gap-3">
           <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-[var(--color-text-muted)]" />
           <div>
-            <p className="font-body text-[15px] font-medium text-white">{name}</p>
-            <p className="font-body text-[13px] text-[var(--color-text-muted)]">{description}</p>
+            <p className="text-body font-semibold text-white">{name}</p>
+            <p className="text-body text-[var(--color-text-muted)]">{description}</p>
           </div>
         </li>
       ))}
@@ -139,7 +130,7 @@ interface MoneyCard {
 export function MoneyCards({ cards }: { cards: MoneyCard[] }) {
   return (
     <>
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
         {cards.map(({ icon: Icon, title, body }) => (
           <motion.div
             key={title}
@@ -151,12 +142,12 @@ export function MoneyCards({ cards }: { cards: MoneyCard[] }) {
             className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] p-6"
           >
             <Icon className="h-6 w-6 text-white" strokeWidth={1.5} />
-            <h3 className="mt-4 font-display text-base font-bold text-white">{title}</h3>
-            <p className="mt-2 font-body text-sm text-[var(--color-text-muted)]">{body}</p>
+            <h3 className="text-heading mt-4 text-white">{title}</h3>
+            <p className="text-body mt-2 text-[var(--color-text-muted)]">{body}</p>
           </motion.div>
         ))}
       </div>
-      <p className="mt-4 flex items-center justify-center gap-2 font-body text-[13px] text-[var(--color-text-muted)]">
+      <p className="text-body mt-4 flex items-center justify-center gap-2 text-[var(--color-text-muted)]">
         <Plug className="h-3.5 w-3.5 text-[var(--color-text-dim)]" strokeWidth={1.5} />
         Xero and MYOB integrations coming soon.
       </p>

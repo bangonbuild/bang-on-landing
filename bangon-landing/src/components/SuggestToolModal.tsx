@@ -77,22 +77,19 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
         {success ? (
           <div className="flex flex-col items-center py-4 text-center">
             <CheckCircle className="h-8 w-8 text-[var(--color-success)]" strokeWidth={1.5} />
-            <p className="mt-4 font-display text-lg font-bold text-white">
+            <p className="text-heading mt-4 text-white">
               Thanks. We&apos;ll add it to the backlog.
             </p>
-            <p className="mt-2 font-body text-sm text-[var(--color-text-muted)]">
+            <p className="text-body mt-2 text-[var(--color-text-muted)]">
               We review every suggestion and the best ones ship.
             </p>
           </div>
         ) : (
           <>
-            <h2
-              id="suggest-tool-title"
-              className="pr-8 font-display text-[22px] font-bold text-white"
-            >
+            <h2 id="suggest-tool-title" className="text-heading pr-8 text-white">
               Suggest a tool
             </h2>
-            <p className="mb-3 mt-2 font-body text-sm text-[var(--color-text-muted)]">
+            <p className="text-body mb-3 mt-2 text-[var(--color-text-muted)]">
               We&apos;re building datum.ai with tradies. Tell us what you need.
             </p>
 
@@ -143,7 +140,7 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
               )}
               <button
                 type="submit"
-                className="h-12 w-full min-w-0 rounded-xl bg-white font-body text-[15px] font-medium text-black transition-opacity hover:opacity-90"
+                className="text-body min-h-12 w-full min-w-0 bg-white font-normal text-black transition-opacity hover:opacity-90"
               >
                 Send suggestion
               </button>

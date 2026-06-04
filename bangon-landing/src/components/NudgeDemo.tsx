@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Loader2, Send } from 'lucide-react'
+import { ArrowUp, Loader2 } from 'lucide-react'
 
 const API_URL = 'https://bang-on-v3.vercel.app/api/ai'
 
@@ -56,8 +56,7 @@ export function NudgeDemo() {
     if (!trimmed || loading) return
 
     const userMsg: Message = { id: `u-${Date.now()}`, role: 'user', content: trimmed }
-    const nextMessages = [...messages, userMsg]
-    setMessages(nextMessages)
+    setMessages((prev) => [...prev, userMsg])
     setInput('')
     setError(null)
     setLoading(true)
@@ -92,80 +91,70 @@ export function NudgeDemo() {
   }
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-[380px]">
-      <div className="overflow-hidden rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)]">
-        <div className="border-b border-[var(--color-border)] px-4 py-3">
-          <p className="font-display text-xs font-bold text-white">datum.ai</p>
-          <p className="font-body text-sm text-[var(--color-text-muted)]">Ask Nudge</p>
-        </div>
-
-        <div
-          ref={scrollRef}
-          className="flex max-h-[320px] min-h-[280px] flex-col gap-3 overflow-y-auto px-4 py-4"
-        >
-          {visibleMessages.map((msg) => (
+    <div className="mx-auto w-full min-w-0 max-w-[560px]">
+      <div
+        ref={scrollRef}
+        className="mb-6 flex max-h-[360px] min-h-[200px] flex-col gap-4 overflow-y-auto"
+      >
+        {visibleMessages.map((msg) =>
+          msg.role === 'user' ? (
             <div
               key={msg.id}
-              className={`max-w-[90%] rounded-xl px-3 py-2 font-body text-[13px] leading-relaxed ${
-                msg.role === 'user'
-                  ? 'ml-auto bg-[var(--color-surface-2)] text-white'
-                  : 'mr-auto bg-[var(--color-bg)] text-[var(--color-text-muted)]'
-              }`}
+              className="text-body ml-auto max-w-[85%] rounded-xl bg-[var(--color-surface-2)] px-4 py-3 text-white"
             >
-              {msg.role === 'nudge' && (
-                <span className="mb-0.5 block font-display text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-dim)]">
-                  Nudge
-                </span>
-              )}
               {msg.content}
             </div>
-          ))}
-          {loading && (
-            <div className="mr-auto flex items-center gap-2 rounded-xl bg-[var(--color-bg)] px-3 py-2 text-[var(--color-text-muted)]">
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              <span className="font-body text-[13px]">Nudge is thinking...</span>
+          ) : (
+            <div
+              key={msg.id}
+              className="text-body mr-auto max-w-[90%] border-l-2 border-[var(--color-border)] py-1 pl-4 text-white"
+            >
+              {msg.content}
             </div>
-          )}
-        </div>
-
-        {error && (
-          <p className="px-4 pb-2 font-body text-xs text-[var(--color-text-muted)]">{error}</p>
+          ),
         )}
-
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center gap-2 border-t border-[var(--color-border)] p-3"
-        >
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Nudge anything..."
-            disabled={loading}
-            className="h-10 flex-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 font-body text-sm text-white placeholder:text-[var(--color-text-dim)] outline-none focus:border-[var(--color-border-2)]"
-          />
-          <button
-            type="submit"
-            disabled={loading || !input.trim()}
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-black disabled:opacity-40"
-            aria-label="Send message"
-          >
-            <Send className="h-4 w-4" />
-          </button>
-        </form>
+        {loading && (
+          <div className="text-body mr-auto flex items-center gap-2 border-l-2 border-[var(--color-border)] py-1 pl-4 text-[var(--color-text-muted)]">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Nudge is thinking...
+          </div>
+        )}
       </div>
 
-      <div className="mt-4 flex flex-col gap-2">
+      {error && (
+        <p className="text-body mb-3 text-[var(--color-text-muted)]">{error}</p>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full min-w-0 items-center gap-3 rounded-[24px] border border-[var(--color-border-2)] bg-[var(--color-surface-2)] px-4 py-3 shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+      >
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask Nudge..."
+          disabled={loading}
+          className="text-body min-h-[44px] min-w-0 flex-1 border-0 bg-transparent text-white outline-none placeholder:text-[var(--color-text-dim)]"
+        />
+        <button
+          type="submit"
+          disabled={loading || !input.trim()}
+          className="flex h-11 w-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full bg-white text-black disabled:opacity-40"
+          aria-label="Send message"
+        >
+          <ArrowUp className="h-4 w-4" strokeWidth={2} />
+        </button>
+      </form>
+
+      <div className="mt-4 flex w-full min-w-0 flex-col gap-2">
         {SUGGESTED_PROMPTS.map((prompt) => (
           <button
             key={prompt}
             type="button"
-            onClick={() => {
-              setInput(prompt)
-              void sendMessage(prompt)
-            }}
+            onClick={() => void sendMessage(prompt)}
             disabled={loading}
-            className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-left font-body text-[13px] text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-2)] disabled:opacity-50"
+            className="text-body min-h-[44px] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-3 text-left text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-2)] disabled:opacity-50"
           >
             {prompt}
           </button>
