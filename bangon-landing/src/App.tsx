@@ -34,7 +34,7 @@ function NudgeSection() {
   return (
     <PageSection id="nudge">
       <div className="flex flex-col items-center text-center">
-        <SectionLabel className="self-center">ASK NUDGE</SectionLabel>
+        <SectionLabel centered>ASK NUDGE</SectionLabel>
         <p className="text-body mt-6 max-w-[600px] text-[var(--color-text-muted)]">
           Nudge powers datum.ai and knows Australian building standards, timber framing,
           concrete, plumbing, NCC compliance, and more. Whatever the trade, whatever the
@@ -66,7 +66,7 @@ function SnapMockup() {
 
 function FinalCta() {
   return (
-    <PageSection className="flex min-h-screen flex-col justify-center">
+    <PageSection id="early-access" className="flex min-h-screen flex-col justify-center">
       <motion.div
         className="mx-auto flex w-full min-w-0 max-w-[640px] flex-col items-center text-center"
         initial="hidden"
@@ -75,7 +75,7 @@ function FinalCta() {
         transition={{ staggerChildren: 0.1 }}
       >
         <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }}>
-          <SectionLabel className="self-center">GET EARLY ACCESS</SectionLabel>
+          <SectionLabel centered>GET EARLY ACCESS</SectionLabel>
         </motion.div>
         <motion.h2
           variants={fadeUp}
@@ -185,7 +185,7 @@ function MoneySection() {
   return (
     <PageSection id="money" className="bg-[var(--color-surface)]">
       <div className="flex flex-col items-center text-center">
-        <SectionLabel className="self-center">MONEY</SectionLabel>
+        <SectionLabel centered>MONEY</SectionLabel>
         <h2 className="text-display mt-6 max-w-full text-white">
           Quotes. Invoices. Cashflow.
         </h2>

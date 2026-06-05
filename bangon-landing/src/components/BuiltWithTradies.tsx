@@ -30,7 +30,7 @@ export function BuiltWithTradies() {
   return (
     <PageSection className="bg-[var(--color-surface)]">
       <div className="flex flex-col items-center text-center">
-        <SectionLabel className="self-center">HOW WE BUILT IT</SectionLabel>
+        <SectionLabel centered>HOW WE BUILT IT</SectionLabel>
         <h2 className="text-display mt-6 text-white">Made on site. Tested on site.</h2>
         <p className="text-body mt-4 max-w-[600px] text-[var(--color-text-muted)]">
           Every feature started with a real problem, raised by real tradies, tested in real

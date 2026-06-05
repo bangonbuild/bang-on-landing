@@ -19,7 +19,7 @@ export function Nav() {
   }, [])
 
   const scrollToWaitlist = () => {
-    document.getElementById('waitlist-hero')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('early-access')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -50,9 +50,9 @@ export function Nav() {
             </div>
 
             <div className="flex shrink-0 items-center gap-2 md:gap-3">
-              <a href="#money" className="nav-action hidden sm:inline-flex">
+              <span className="nav-action hidden sm:inline-flex" role="presentation">
                 Pricing
-              </a>
+              </span>
               <button type="button" onClick={scrollToWaitlist} className="nav-action">
                 Join waitlist
               </button>

@@ -119,7 +119,7 @@ export function FeatureCallouts() {
   return (
     <PageSection>
       <div className="flex flex-col items-center text-center">
-        <SectionLabel className="self-center">WHAT&apos;S INSIDE</SectionLabel>
+        <SectionLabel centered>WHAT&apos;S INSIDE</SectionLabel>
         <h2 className="text-display mt-6 text-white">
           Everything a tradie needs. Nothing they don&apos;t.
         </h2>
