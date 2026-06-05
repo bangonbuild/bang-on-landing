@@ -117,7 +117,7 @@ function CalloutCardItem({ icon: Icon, title, description, animation, index }: C
 
 export function FeatureCallouts() {
   return (
-    <PageSection>
+    <PageSection className="whats-inside-section">
       <div className="flex flex-col items-center text-center">
         <SectionLabel centered>WHAT&apos;S INSIDE</SectionLabel>
         <h2 className="text-display mt-6 text-white">

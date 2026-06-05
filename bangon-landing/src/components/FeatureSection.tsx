@@ -147,10 +147,15 @@ export function MoneyCards({ cards }: { cards: MoneyCard[] }) {
           </motion.div>
         ))}
       </div>
-      <p className="text-body mt-4 flex items-center justify-center gap-2 text-[var(--color-text-muted)]">
-        <Plug className="h-3.5 w-3.5 text-[var(--color-text-dim)]" strokeWidth={1.5} />
-        Xero and MYOB integrations coming soon.
-      </p>
     </>
+  )
+}
+
+export function MoneyIntegrationsNote() {
+  return (
+    <p className="text-body mt-4 flex items-center justify-center gap-2 text-[13px] text-[var(--color-text-muted)]">
+      <Plug className="h-3.5 w-3.5 shrink-0 text-[var(--color-text-dim)]" strokeWidth={1.5} />
+      Xero and MYOB integrations coming soon.
+    </p>
   )
 }

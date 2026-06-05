@@ -2,7 +2,7 @@ import { SiteContainer } from './PageSection'
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg)]">
       <SiteContainer className="flex flex-col gap-8 py-12 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="text-body font-semibold text-white">datum.ai</p>

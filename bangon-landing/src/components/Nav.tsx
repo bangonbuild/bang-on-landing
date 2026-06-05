@@ -8,11 +8,15 @@ const navLinks = [
   { label: 'Toolbox', href: '#toolbox' },
 ]
 
-export function Nav() {
-  const [sticky, setSticky] = useState(false)
+interface NavProps {
+  onPricingClick: () => void
+}
+
+export function Nav({ onPricingClick }: NavProps) {
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setSticky(window.scrollY > 60)
+    const onScroll = () => setScrolled(window.scrollY > 0)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -23,44 +27,39 @@ export function Nav() {
   }
 
   return (
-    <>
-      <header
-        className={`z-50 w-full transition-all duration-300 ${
-          sticky ? 'fixed top-0 left-0 right-0' : 'relative'
+    <header className="sticky top-0 z-50 w-full">
+      <nav
+        className={`nav-bar flex h-[72px] w-full items-center border-b ${
+          scrolled ? 'nav-bar-scrolled' : 'nav-bar-top'
         }`}
       >
-        <nav
-          className={`flex h-[72px] w-full items-center border-b transition-all duration-300 ${
-            sticky
-              ? 'border-[var(--color-border)] bg-[rgba(32,33,36,0.85)] backdrop-blur-[12px]'
-              : 'border-transparent bg-[var(--color-bg)]'
-          }`}
-        >
-          <div className="site-container flex h-full w-full items-center justify-between gap-4">
-            <a href="#" className="text-body shrink-0 font-semibold text-white">
-              datum.ai
-            </a>
+        <div className="site-container flex h-full w-full items-center justify-between gap-4">
+          <a href="#" className="text-body shrink-0 font-semibold text-white">
+            datum.ai
+          </a>
 
-            <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 lg:flex">
-              {navLinks.map((link) => (
-                <a key={link.href} href={link.href} className="nav-pill">
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="flex shrink-0 items-center gap-2 md:gap-3">
-              <span className="nav-action hidden sm:inline-flex" role="presentation">
-                Pricing
-              </span>
-              <button type="button" onClick={scrollToWaitlist} className="nav-action">
-                Join waitlist
-              </button>
-            </div>
+          <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 lg:flex">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="nav-pill">
+                {link.label}
+              </a>
+            ))}
           </div>
-        </nav>
-      </header>
-      {sticky && <div className="h-[72px] shrink-0" aria-hidden />}
-    </>
+
+          <div className="flex shrink-0 items-center gap-2 md:gap-3">
+            <button
+              type="button"
+              onClick={onPricingClick}
+              className="btn-secondary hidden sm:inline-flex"
+            >
+              Pricing
+            </button>
+            <button type="button" onClick={scrollToWaitlist} className="btn-primary">
+              Join waitlist
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
   )
 }

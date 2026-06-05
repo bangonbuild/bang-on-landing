@@ -28,7 +28,7 @@ const cards = [
 
 export function BuiltWithTradies() {
   return (
-    <PageSection className="bg-[var(--color-surface)]">
+    <PageSection>
       <div className="flex flex-col items-center text-center">
         <SectionLabel centered>HOW WE BUILT IT</SectionLabel>
         <h2 className="text-display mt-6 text-white">Made on site. Tested on site.</h2>

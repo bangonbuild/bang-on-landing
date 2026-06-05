@@ -2,11 +2,11 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #000000;
-  --color-surface: #0a0a0a;
-  --color-surface-2: #111111;
-  --color-border: #1f1f1f;
-  --color-border-2: #2a2a2a;
+  --color-bg: #202124;
+  --color-surface: #2c2d30;
+  --color-surface-2: #353638;
+  --color-border: #3c3d40;
+  --color-border-2: #48494c;
   --color-text-primary: #ffffff;
   --color-text-muted: rgba(255, 255, 255, 0.5);
   --color-text-dim: rgba(255, 255, 255, 0.3);
@@ -118,29 +118,47 @@ button,
   line-height: 1.65;
 }
 
+.nav-bar {
+  transition:
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    border-bottom-color 0.3s ease;
+}
+
+.nav-bar-top {
+  border-bottom-color: transparent;
+  background-color: transparent;
+}
+
+.nav-bar-scrolled {
+  border-bottom-color: var(--color-border);
+  background-color: rgba(32, 33, 36, 0.92);
+  backdrop-filter: blur(12px);
+}
+
 .nav-pill {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
   border-radius: 999px;
   border: 1px solid var(--color-border-2);
-  background: transparent;
+  background: var(--color-surface-2);
   padding: 8px 16px;
   font-size: var(--text-body);
   font-weight: 400;
-  color: var(--color-text-muted);
-  transition: border-color 0.2s ease, color 0.2s ease;
+  color: var(--color-text-primary);
+  transition: border-color 0.2s ease, opacity 0.2s ease;
 }
 
 .nav-pill:hover {
-  border-color: var(--color-text-primary);
-  color: var(--color-text-primary);
+  opacity: 0.9;
 }
 
-.nav-action {
+.btn-primary {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 48px;
   align-items: center;
+  justify-content: center;
   border-radius: 999px;
   background: #ffffff;
   padding: 12px 20px;
@@ -150,8 +168,119 @@ button,
   transition: opacity 0.2s ease;
 }
 
-.nav-action:hover {
+.btn-primary:hover {
   opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-2);
+  background: var(--color-surface-2);
+  padding: 12px 20px;
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.waitlist-input {
+  min-height: 48px;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 0 16px;
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.waitlist-input::placeholder {
+  color: var(--color-text-dim);
+}
+
+.waitlist-input:focus {
+  border-color: var(--color-border-2);
+}
+
+.waitlist-input:disabled {
+  opacity: 0.6;
+}
+
+.section-divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.whats-inside-section {
+  display: block;
+}
+
+@media (max-width: 639px) {
+  .whats-inside-section {
+    display: none;
+  }
+}
+
+.nudge-markdown {
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+
+.nudge-markdown strong {
+  font-weight: 600;
+}
+
+.nudge-markdown p {
+  margin: 0.5em 0;
+}
+
+.nudge-markdown p:first-child {
+  margin-top: 0;
+}
+
+.nudge-markdown ul,
+.nudge-markdown ol {
+  margin: 0.5em 0;
+  padding-left: 1.25em;
+}
+
+.nudge-markdown table {
+  border-collapse: collapse;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.nudge-markdown th,
+.nudge-markdown td {
+  border: 1px solid var(--color-border);
+  padding: 12px;
+  background: var(--color-surface-2);
+}
+
+.nudge-markdown code {
+  background: var(--color-surface-2);
+  font-family: var(--font-display);
+  font-size: 13px;
+  padding: 2px 6px;
 }
 
 .font-display {

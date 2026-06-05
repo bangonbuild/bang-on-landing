@@ -10,7 +10,7 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-12 pt-6 noise-bg md:pb-20">
+    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-12 pt-[80px] noise-bg md:pb-20">
       <SiteContainer>
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-10 lg:grid-cols-[55%_45%]">
           <motion.div
@@ -41,9 +41,12 @@ export function Hero() {
               id="waitlist-hero"
               variants={fadeUp}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="mt-10 w-full min-w-0 max-w-[480px]"
+              className="mt-10 w-full min-w-0 max-w-[640px]"
             >
               <WaitlistForm variant="hero" className="mx-0 max-w-none" />
+              <p className="text-body mt-3 text-left text-[13px] text-[var(--color-text-muted)]">
+                Free for your first 3 months. No credit card needed.
+              </p>
             </motion.div>
 
             <motion.div

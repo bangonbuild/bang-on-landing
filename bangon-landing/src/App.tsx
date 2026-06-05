@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   Banknote,
   BookOpen,
@@ -16,7 +16,12 @@ import { Hero } from './components/Hero'
 import { FeatureCallouts } from './components/FeatureCallouts'
 import { SectionLabel } from './components/SectionLabel'
 import { NudgeDemo } from './components/NudgeDemo'
-import { FeatureSection, MoneyCards, ToolboxList } from './components/FeatureSection'
+import {
+  FeatureSection,
+  MoneyCards,
+  MoneyIntegrationsNote,
+  ToolboxList,
+} from './components/FeatureSection'
 import { PhoneMockup } from './components/PhoneMockup'
 import { BuiltWithTradies } from './components/BuiltWithTradies'
 import { WaitlistForm } from './components/WaitlistForm'
@@ -24,6 +29,10 @@ import { Footer } from './components/Footer'
 import { SuggestToolModal } from './components/SuggestToolModal'
 import { SuggestToolProvider, useSuggestTool } from './context/SuggestToolContext'
 import { PageSection } from './components/PageSection'
+import { SectionDivider } from './components/SectionDivider'
+import { Loader } from './components/Loader'
+import { PricingModal } from './components/PricingModal'
+import { NudgeModal } from './components/NudgeModal'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -31,33 +40,52 @@ const fadeUp = {
 }
 
 function NudgeSection() {
+  const [nudgeOpen, setNudgeOpen] = useState(false)
+
   return (
-    <PageSection id="nudge">
-      <div className="flex flex-col items-center text-center">
-        <SectionLabel centered>ASK NUDGE</SectionLabel>
-        <p className="text-body mt-6 max-w-[600px] text-[var(--color-text-muted)]">
-          Nudge powers datum.ai and knows Australian building standards, timber framing,
-          concrete, plumbing, NCC compliance, and more. Whatever the trade, whatever the
-          problem, ask Nudge and get a straight answer. Chat through text or voice.
-        </p>
-      </div>
-      <motion.div
-        className="mt-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        variants={fadeUp}
-      >
-        <NudgeDemo />
-      </motion.div>
-    </PageSection>
+    <>
+      <PageSection id="nudge">
+        <div className="flex flex-col items-center text-center sm:hidden">
+          <SectionLabel centered>ASK NUDGE</SectionLabel>
+          <h2 className="text-display mt-6 text-white">Give Nudge a crack.</h2>
+          <button
+            type="button"
+            onClick={() => setNudgeOpen(true)}
+            className="btn-primary mt-8 w-full max-w-[400px]"
+          >
+            Try Nudge →
+          </button>
+        </div>
+
+        <div className="hidden sm:block">
+          <div className="flex flex-col items-center text-center">
+            <SectionLabel centered>ASK NUDGE</SectionLabel>
+            <p className="text-body mt-6 max-w-[600px] text-[var(--color-text-muted)]">
+              Nudge powers datum.ai and knows Australian building standards, timber framing,
+              concrete, plumbing, NCC compliance, and more. Whatever the trade, whatever the
+              problem, ask Nudge and get a straight answer. Chat through text or voice.
+            </p>
+          </div>
+          <motion.div
+            className="mt-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            variants={fadeUp}
+          >
+            <NudgeDemo layout="embedded" />
+          </motion.div>
+        </div>
+      </PageSection>
+      <NudgeModal open={nudgeOpen} onClose={() => setNudgeOpen(false)} />
+    </>
   )
 }
 
 function SnapMockup() {
   return (
-    <div className="mx-auto flex w-full min-w-0 max-w-[390px] flex-col items-center justify-center rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] aspect-[390/520] p-8">
+    <div className="mx-auto flex aspect-[390/520] w-full min-w-0 max-w-[390px] flex-col items-center justify-center rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
       <ScanLine className="h-12 w-12 text-[var(--color-text-dim)]" strokeWidth={1.25} />
       <p className="text-body mt-4 text-[var(--color-text-dim)]">App screenshot coming soon</p>
     </div>
@@ -89,8 +117,8 @@ function FinalCta() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-body mt-4 max-w-[480px] text-[var(--color-text-muted)]"
         >
-          datum.ai is coming to iPhone and Android. Join the waitlist and get the first 3
-          months free. All we ask is honest feedback.
+          datum.ai is coming to iPhone and Android. Join the waitlist, get the first 3 months
+          free, and help shape what we build next.
         </motion.p>
         <motion.div
           variants={fadeUp}
@@ -104,8 +132,8 @@ function FinalCta() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-body mt-4 text-[var(--color-text-dim)]"
         >
-          Free for 3 months for waitlist members. No spam. No credit card. Just a heads up
-          when we launch.
+          Free for your first 3 months. Pricing confirmed before you&apos;re charged — ever.
+          No spam. No credit card.
         </motion.p>
       </motion.div>
     </PageSection>
@@ -130,8 +158,8 @@ function ToolboxSection() {
           <SectionLabel>TOOLBOX</SectionLabel>
           <h2 className="text-display text-white">The tools you reach for every day.</h2>
           <p className="text-body text-[var(--color-text-muted)]">
-            From quick calculations to photo reports and compliance tools, the Toolbox
-            covers the tasks that come up on site every day. Something missing?{' '}
+            Measure, calculate, report, and comply. The Toolbox covers what comes up on site
+            every day — not a hundred features you&apos;ll never use. Something missing?{' '}
             <button
               type="button"
               onClick={openSuggestModal}
@@ -183,7 +211,7 @@ function ToolboxSection() {
 
 function MoneySection() {
   return (
-    <PageSection id="money" className="bg-[var(--color-surface)]">
+    <PageSection id="money">
       <div className="flex flex-col items-center text-center">
         <SectionLabel centered>MONEY</SectionLabel>
         <h2 className="text-display mt-6 max-w-full text-white">
@@ -193,6 +221,7 @@ function MoneySection() {
           Describe the scope and Nudge writes the quote. Convert it to an invoice when the
           job&apos;s done. Track outstanding, overdue, and paid, all from your phone.
         </p>
+        <MoneyIntegrationsNote />
       </div>
       <MoneyCards
         cards={[
@@ -217,34 +246,47 @@ function MoneySection() {
   )
 }
 
-export default function App() {
-  const [suggestModalOpen, setSuggestModalOpen] = useState(false)
+function LandingPage() {
+  const [pricingOpen, setPricingOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setLoading(false), 600)
+    return () => window.clearTimeout(t)
+  }, [])
+
+  const scrollToWaitlist = () => {
+    document.getElementById('early-access')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <SuggestToolProvider openSuggestModal={() => setSuggestModalOpen(true)}>
+    <>
+      <AnimatePresence>{loading && <Loader />}</AnimatePresence>
       <div className="w-full overflow-x-hidden">
-        <Nav />
+        <Nav onPricingClick={() => setPricingOpen(true)} />
         <main className="w-full min-w-0 overflow-x-hidden">
           <Hero />
+          <SectionDivider className="max-sm:hidden" />
           <FeatureCallouts />
+          <SectionDivider />
           <NudgeSection />
+          <SectionDivider />
           <FeatureSection
             id="snap"
             label="SNAP"
             headline="Point. Snap. Done."
-            body="Take a photo of anything on site: a connection detail, a crack, a plan, a material. datum.ai reads it and tells you exactly what you need to know.
-
-Identify issues before they become problems. Get NCC-aware advice in seconds. No more calling the engineer for something you could've solved on the spot."
+            body="Point your camera at any site problem. Nudge reads it and tells you what you need to know before it becomes a bigger issue."
             features={[
               'Identify materials and components',
-              'Spot compliance issues instantly',
-              'Scan plans and get plain-language explanations',
+              'Spot compliance issues on the spot',
+              'Scan plans and get plain-language answers',
             ]}
             imagePosition="left"
             mockupLabel="SNAP screen coming soon"
           >
             <SnapMockup />
           </FeatureSection>
+          <SectionDivider />
           <FeatureSection
             id="jobs"
             label="JOBS"
@@ -255,27 +297,42 @@ Identify issues before they become problems. Get NCC-aware advice in seconds. No
                 In one place.
               </>
             }
-            body={`Create a job, add your client, and datum.ai builds a living timeline as work progresses. Notes, photos, quotes and invoices, all in one place. Nudge polishes your client updates. Share reports, quotes and invoices with one tap. Add your crew and keep everyone across the job.`}
+            body="Create a job, add your client, and build a living timeline as work progresses. Nudge polishes your updates. Documents shared with one tap."
             features={[
-              'Living timeline: notes, photos, quotes, invoices',
-              'Nudge writes and polishes your client updates',
-              'Share reports and documents with one tap',
-              'Add your crew and keep everyone in the loop',
+              'Timeline — notes, photos, quotes, invoices',
+              'Nudge polishes your client updates',
+              'Add your crew, keep everyone across the job',
             ]}
             imagePosition="right"
             mockupLabel="Job detail screen coming soon"
           />
+          <SectionDivider />
           <MoneySection />
+          <SectionDivider />
           <ToolboxSection />
+          <SectionDivider />
           <BuiltWithTradies />
+          <SectionDivider />
           <FinalCta />
         </main>
         <Footer />
-        <SuggestToolModal
-          open={suggestModalOpen}
-          onClose={() => setSuggestModalOpen(false)}
+        <PricingModal
+          open={pricingOpen}
+          onClose={() => setPricingOpen(false)}
+          onJoinWaitlist={scrollToWaitlist}
         />
       </div>
+    </>
+  )
+}
+
+export default function App() {
+  const [suggestModalOpen, setSuggestModalOpen] = useState(false)
+
+  return (
+    <SuggestToolProvider openSuggestModal={() => setSuggestModalOpen(true)}>
+      <LandingPage />
+      <SuggestToolModal open={suggestModalOpen} onClose={() => setSuggestModalOpen(false)} />
     </SuggestToolProvider>
   )
 }
