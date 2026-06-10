@@ -21,7 +21,7 @@ export function NudgeDrawer({ open, onClose }: NudgeDrawerProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] bg-[rgba(0,0,0,0.6)]"
+              className="drawer-overlay"
               onClick={onClose}
             />
             <motion.div

@@ -292,7 +292,8 @@ button,
   padding: 2px 6px;
 }
 
-.modal-overlay {
+.modal-overlay,
+.drawer-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
@@ -301,8 +302,16 @@ button,
   margin: 0;
   padding: 0;
   border: none;
-  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0;
   cursor: default;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.drawer-overlay {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-shell {
