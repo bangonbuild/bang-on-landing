@@ -36,7 +36,13 @@ export function NudgeDrawer({ open, onClose }: NudgeDrawerProps) {
               <div className="flex shrink-0 justify-center pt-3">
                 <div className="h-1 w-10 rounded-full bg-[var(--color-border-2)]" />
               </div>
-              <div className="min-h-0 flex-1 px-4 pb-4">
+              <div
+                className="min-h-0 flex-1 px-4"
+                style={{
+                  paddingBottom:
+                    'calc(1.25rem + 3.5rem + 12px + env(safe-area-inset-bottom, 0px))',
+                }}
+              >
                 <NudgeDemo layout="modal" />
               </div>
             </motion.div>
