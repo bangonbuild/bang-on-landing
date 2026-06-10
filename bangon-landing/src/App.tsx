@@ -206,11 +206,11 @@ function LandingPage() {
   return (
     <>
       <AnimatePresence>{loading && <Loader />}</AnimatePresence>
+      <Nav
+        onPricingClick={() => setPricingOpen(true)}
+        onWaitlistClick={() => setWaitlistOpen(true)}
+      />
       <div className="w-full overflow-x-hidden">
-        <Nav
-          onPricingClick={() => setPricingOpen(true)}
-          onWaitlistClick={() => setWaitlistOpen(true)}
-        />
         <main className="w-full min-w-0 overflow-x-hidden">
           <Hero />
           <SectionDivider className="max-sm:hidden" />

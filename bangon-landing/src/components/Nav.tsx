@@ -24,7 +24,7 @@ export function Nav({ onPricingClick, onWaitlistClick }: NavProps) {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 w-full">
+    <header className="site-nav fixed top-0 left-0 right-0 z-50 w-full">
       <nav
         className={`nav-bar flex h-[72px] w-full items-center border-b ${
           scrolled ? 'nav-bar-scrolled' : 'nav-bar-top'

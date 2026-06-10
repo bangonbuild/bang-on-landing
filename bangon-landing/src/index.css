@@ -44,6 +44,15 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
 }
 
 body {
