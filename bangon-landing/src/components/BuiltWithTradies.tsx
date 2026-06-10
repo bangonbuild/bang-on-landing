@@ -12,7 +12,7 @@ const cards = [
   {
     icon: Users,
     title: 'Started with tradies',
-    body: 'We spent time on site talking to builders, carpenters, concretors and site supervisors. We asked what slowed them down. We took notes.',
+    body: 'We spent time on site talking to tradies in their natural environment — on the tools, in the ute, between jobs. We watched how they worked and built around what actually matters.',
   },
   {
     icon: Pencil,

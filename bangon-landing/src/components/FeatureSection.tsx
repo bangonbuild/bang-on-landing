@@ -103,16 +103,20 @@ interface ToolItem {
   icon: LucideIcon
   name: string
   description: string
+  comingSoon?: boolean
 }
 
 export function ToolboxList({ items }: { items: ToolItem[] }) {
   return (
     <ul className="flex flex-col gap-5">
-      {items.map(({ icon: Icon, name, description }) => (
+      {items.map(({ icon: Icon, name, description, comingSoon }) => (
         <li key={name} className="flex gap-3">
           <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-[var(--color-text-muted)]" />
           <div>
-            <p className="text-body font-semibold text-white">{name}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-body font-semibold text-white">{name}</p>
+              {comingSoon && <span className="coming-soon-badge">Coming soon</span>}
+            </div>
             <p className="text-body text-[var(--color-text-muted)]">{description}</p>
           </div>
         </li>

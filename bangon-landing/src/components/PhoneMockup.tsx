@@ -2,9 +2,13 @@ import { Smartphone } from 'lucide-react'
 
 interface PhoneMockupProps {
   label?: string
+  comingSoon?: boolean
 }
 
-export function PhoneMockup({ label = 'App screenshot coming soon' }: PhoneMockupProps) {
+export function PhoneMockup({
+  label = 'App screenshot coming soon',
+  comingSoon = true,
+}: PhoneMockupProps) {
   return (
     <div className="mx-auto w-full min-w-0 max-w-[390px]">
       <div
@@ -13,11 +17,15 @@ export function PhoneMockup({ label = 'App screenshot coming soon' }: PhoneMocku
           boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.03)',
         }}
       >
-        <div className="absolute inset-4 rounded-[32px] border border-[var(--color-border)] pointer-events-none" />
+        <div className="absolute inset-4 pointer-events-none rounded-[32px] border border-[var(--color-border)]" />
         <Smartphone className="relative z-10 h-12 w-12 text-[var(--color-text-dim)]" strokeWidth={1.25} />
-        <p className="text-body relative z-10 mt-4 text-center text-[var(--color-text-dim)]">
-          {label}
-        </p>
+        {comingSoon ? (
+          <span className="coming-soon-badge relative z-10 mt-4">Coming soon</span>
+        ) : (
+          <p className="text-body relative z-10 mt-4 text-center text-[var(--color-text-muted)]">
+            {label}
+          </p>
+        )}
       </div>
     </div>
   )

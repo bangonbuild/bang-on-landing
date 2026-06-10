@@ -24,7 +24,6 @@ import {
 } from './components/FeatureSection'
 import { PhoneMockup } from './components/PhoneMockup'
 import { BuiltWithTradies } from './components/BuiltWithTradies'
-import { WaitlistForm } from './components/WaitlistForm'
 import { Footer } from './components/Footer'
 import { SuggestToolModal } from './components/SuggestToolModal'
 import { SuggestToolProvider, useSuggestTool } from './context/SuggestToolContext'
@@ -32,54 +31,50 @@ import { PageSection } from './components/PageSection'
 import { SectionDivider } from './components/SectionDivider'
 import { Loader } from './components/Loader'
 import { PricingModal } from './components/PricingModal'
-import { NudgeModal } from './components/NudgeModal'
+import { WaitlistModal } from './components/WaitlistModal'
+import { NudgeDrawer } from './components/NudgeDrawer'
+import { NudgeFab } from './components/NudgeFab'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 }
 
+const MOBILE_NUDGE_COPY =
+  'Nudge powers datum.ai. He knows Australian building standards, NCC compliance, and every trade on site. And he\u2019s getting smarter every day — trained on real tradie feedback.'
+
 function NudgeSection() {
-  const [nudgeOpen, setNudgeOpen] = useState(false)
-
   return (
-    <>
-      <PageSection id="nudge">
-        <div className="flex flex-col items-center text-center sm:hidden">
-          <SectionLabel centered>ASK NUDGE</SectionLabel>
-          <h2 className="text-display mt-6 text-white">Give Nudge a crack.</h2>
-          <button
-            type="button"
-            onClick={() => setNudgeOpen(true)}
-            className="btn-primary mt-8 w-full max-w-[400px]"
-          >
-            Try Nudge →
-          </button>
-        </div>
+    <PageSection id="nudge">
+      <div className="flex flex-col items-center text-center sm:hidden">
+        <SectionLabel centered>ASK NUDGE</SectionLabel>
+        <h2 className="text-display mt-6 text-white">Give Nudge a crack.</h2>
+        <p className="nudge-mobile-copy mb-4 mt-4 max-w-[600px] text-[var(--color-text-muted)]">
+          {MOBILE_NUDGE_COPY}
+        </p>
+      </div>
 
-        <div className="hidden sm:block">
-          <div className="flex flex-col items-center text-center">
-            <SectionLabel centered>ASK NUDGE</SectionLabel>
-            <p className="text-body mt-6 max-w-[600px] text-[var(--color-text-muted)]">
-              Nudge powers datum.ai and knows Australian building standards, timber framing,
-              concrete, plumbing, NCC compliance, and more. Whatever the trade, whatever the
-              problem, ask Nudge and get a straight answer. Chat through text or voice.
-            </p>
-          </div>
-          <motion.div
-            className="mt-10"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            variants={fadeUp}
-          >
-            <NudgeDemo layout="embedded" />
-          </motion.div>
+      <div className="hidden sm:block">
+        <div className="flex flex-col items-center text-center">
+          <SectionLabel centered>ASK NUDGE</SectionLabel>
+          <p className="text-body mt-6 max-w-[600px] text-[var(--color-text-muted)]">
+            Nudge powers datum.ai and knows Australian building standards, timber framing,
+            concrete, plumbing, NCC compliance, and more. Whatever the trade, whatever the
+            problem, ask Nudge and get a straight answer. Chat through text or voice.
+          </p>
         </div>
-      </PageSection>
-      <NudgeModal open={nudgeOpen} onClose={() => setNudgeOpen(false)} />
-    </>
+        <motion.div
+          className="mt-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          variants={fadeUp}
+        >
+          <NudgeDemo layout="embedded" />
+        </motion.div>
+      </div>
+    </PageSection>
   )
 }
 
@@ -87,56 +82,8 @@ function SnapMockup() {
   return (
     <div className="mx-auto flex aspect-[390/520] w-full min-w-0 max-w-[390px] flex-col items-center justify-center rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
       <ScanLine className="h-12 w-12 text-[var(--color-text-dim)]" strokeWidth={1.25} />
-      <p className="text-body mt-4 text-[var(--color-text-dim)]">App screenshot coming soon</p>
+      <span className="coming-soon-badge mt-4">Coming soon</span>
     </div>
-  )
-}
-
-function FinalCta() {
-  return (
-    <PageSection id="early-access" className="flex min-h-screen flex-col justify-center">
-      <motion.div
-        className="mx-auto flex w-full min-w-0 max-w-[640px] flex-col items-center text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        transition={{ staggerChildren: 0.1 }}
-      >
-        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: 'easeOut' }}>
-          <SectionLabel centered>GET EARLY ACCESS</SectionLabel>
-        </motion.div>
-        <motion.h2
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-display mt-6 text-white"
-        >
-          Be first on site.
-        </motion.h2>
-        <motion.p
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-body mt-4 max-w-[480px] text-[var(--color-text-muted)]"
-        >
-          datum.ai is coming to iPhone and Android. Join the waitlist, get the first 3 months
-          free, and help shape what we build next.
-        </motion.p>
-        <motion.div
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mt-10 w-full min-w-0"
-        >
-          <WaitlistForm variant="cta" />
-        </motion.div>
-        <motion.p
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-body mt-4 text-[var(--color-text-dim)]"
-        >
-          Free for your first 3 months. Pricing confirmed before you&apos;re charged — ever.
-          No spam. No credit card.
-        </motion.p>
-      </motion.div>
-    </PageSection>
   )
 }
 
@@ -157,14 +104,10 @@ function ToolboxSection() {
         >
           <SectionLabel>TOOLBOX</SectionLabel>
           <h2 className="text-display text-white">The tools you reach for every day.</h2>
-          <p className="text-body text-[var(--color-text-muted)]">
+          <p className="text-body leading-[1.65] text-[var(--color-text-muted)]">
             Measure, calculate, report, and comply. The Toolbox covers what comes up on site
             every day — not a hundred features you&apos;ll never use. Something missing?{' '}
-            <button
-              type="button"
-              onClick={openSuggestModal}
-              className="min-h-[44px] cursor-pointer text-white underline-offset-2 hover:underline"
-            >
+            <button type="button" onClick={openSuggestModal} className="toolbox-suggest-link">
               Suggest it
             </button>
             .
@@ -187,19 +130,22 @@ function ToolboxSection() {
                 icon: Shield,
                 name: 'SWMS generator',
                 description:
-                  'Describe the high-risk work, Nudge drafts your Safe Work Method Statement. Coming soon.',
+                  'Describe the high-risk work, Nudge drafts your Safe Work Method Statement.',
+                comingSoon: true,
               },
               {
                 icon: ClipboardList,
                 name: 'Defect report',
                 description:
-                  'Document and photograph defects on site. Exportable report. Coming soon.',
+                  'Document and photograph defects on site. Exportable report.',
+                comingSoon: true,
               },
               {
                 icon: BookOpen,
                 name: 'Building codes',
                 description:
-                  'State-by-state building code library. Plain language, fast lookup. Coming soon.',
+                  'State-by-state building code library. Plain language, fast lookup.',
+                comingSoon: true,
               },
             ]}
           />
@@ -248,6 +194,8 @@ function MoneySection() {
 
 function LandingPage() {
   const [pricingOpen, setPricingOpen] = useState(false)
+  const [waitlistOpen, setWaitlistOpen] = useState(false)
+  const [nudgeDrawerOpen, setNudgeDrawerOpen] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -255,15 +203,14 @@ function LandingPage() {
     return () => window.clearTimeout(t)
   }, [])
 
-  const scrollToWaitlist = () => {
-    document.getElementById('early-access')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <>
       <AnimatePresence>{loading && <Loader />}</AnimatePresence>
       <div className="w-full overflow-x-hidden">
-        <Nav onPricingClick={() => setPricingOpen(true)} />
+        <Nav
+          onPricingClick={() => setPricingOpen(true)}
+          onWaitlistClick={() => setWaitlistOpen(true)}
+        />
         <main className="w-full min-w-0 overflow-x-hidden">
           <Hero />
           <SectionDivider className="max-sm:hidden" />
@@ -275,11 +222,11 @@ function LandingPage() {
             id="snap"
             label="SNAP"
             headline="Point. Snap. Done."
-            body="Point your camera at any site problem. Nudge reads it and tells you what you need to know before it becomes a bigger issue."
+            body="Point your camera at anything on site. Nudge reads it and tells you what you need to know — on the spot."
             features={[
               'Identify materials and components',
-              'Spot compliance issues on the spot',
-              'Scan plans and get plain-language answers',
+              'Read plans and get plain-language answers',
+              'Get NCC-aware advice in seconds',
             ]}
             imagePosition="left"
             mockupLabel="SNAP screen coming soon"
@@ -297,11 +244,11 @@ function LandingPage() {
                 In one place.
               </>
             }
-            body="Create a job, add your client, and build a living timeline as work progresses. Nudge polishes your updates. Documents shared with one tap."
+            body="Create a job, add your client, and build a living timeline as work progresses. Keep your client across every step — notes, photos, quotes and invoices, all in one place."
             features={[
-              'Timeline — notes, photos, quotes, invoices',
-              'Nudge polishes your client updates',
-              'Add your crew, keep everyone across the job',
+              'Living timeline — notes, photos, quotes, invoices',
+              'Keep clients updated with one tap',
+              'Add your crew and keep everyone in the loop',
             ]}
             imagePosition="right"
             mockupLabel="Job detail screen coming soon"
@@ -312,15 +259,19 @@ function LandingPage() {
           <ToolboxSection />
           <SectionDivider />
           <BuiltWithTradies />
-          <SectionDivider />
-          <FinalCta />
         </main>
         <Footer />
+        <NudgeFab
+          open={nudgeDrawerOpen}
+          onToggle={() => setNudgeDrawerOpen((v) => !v)}
+        />
+        <NudgeDrawer open={nudgeDrawerOpen} onClose={() => setNudgeDrawerOpen(false)} />
         <PricingModal
           open={pricingOpen}
           onClose={() => setPricingOpen(false)}
-          onJoinWaitlist={scrollToWaitlist}
+          onJoinWaitlist={() => setWaitlistOpen(true)}
         />
+        <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
       </div>
     </>
   )

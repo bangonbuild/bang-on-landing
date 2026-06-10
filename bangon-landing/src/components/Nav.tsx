@@ -10,9 +10,10 @@ const navLinks = [
 
 interface NavProps {
   onPricingClick: () => void
+  onWaitlistClick: () => void
 }
 
-export function Nav({ onPricingClick }: NavProps) {
+export function Nav({ onPricingClick, onWaitlistClick }: NavProps) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -21,10 +22,6 @@ export function Nav({ onPricingClick }: NavProps) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const scrollToWaitlist = () => {
-    document.getElementById('early-access')?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -54,7 +51,7 @@ export function Nav({ onPricingClick }: NavProps) {
             >
               Pricing
             </button>
-            <button type="button" onClick={scrollToWaitlist} className="btn-primary">
+            <button type="button" onClick={onWaitlistClick} className="btn-primary">
               Join waitlist
             </button>
           </div>
