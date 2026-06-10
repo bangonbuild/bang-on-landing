@@ -305,14 +305,22 @@ button,
   cursor: default;
 }
 
-.modal-card {
+.modal-shell {
   position: fixed;
-  left: 50%;
-  top: 50%;
+  inset: 0;
   z-index: 101;
-  width: calc(100% - 32px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
   max-width: 480px;
-  transform: translate(-50%, -50%);
+  pointer-events: auto;
   border-radius: 16px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);

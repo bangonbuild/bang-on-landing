@@ -25,15 +25,16 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
               className="modal-overlay"
               onClick={onClose}
             />
-            <motion.div
-              role="dialog"
-              aria-labelledby="waitlist-title"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-              className="modal-card"
-            >
+            <div className="modal-shell">
+              <motion.div
+                role="dialog"
+                aria-labelledby="waitlist-title"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+                className="modal-card"
+              >
               <button
                 type="button"
                 onClick={onClose}
@@ -60,7 +61,8 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
               <p className="text-body mt-4 text-center text-[13px] text-[var(--color-text-muted)]">
                 Free for your first 3 months. No spam. No credit card.
               </p>
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>

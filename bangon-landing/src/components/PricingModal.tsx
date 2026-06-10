@@ -30,15 +30,16 @@ export function PricingModal({ open, onClose, onJoinWaitlist }: PricingModalProp
               className="modal-overlay"
               onClick={onClose}
             />
-            <motion.div
-              role="dialog"
-              aria-labelledby="pricing-title"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-              className="modal-card"
-            >
+            <div className="modal-shell">
+              <motion.div
+                role="dialog"
+                aria-labelledby="pricing-title"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+                className="modal-card"
+              >
               <div className="mb-6 flex items-start justify-between gap-4">
                 <h2 id="pricing-title" className="text-heading text-white">
                   Pricing
@@ -60,7 +61,8 @@ After 3 months, we'll have pricing sorted. You'll hear from us before anything c
               <button type="button" onClick={handleJoin} className="btn-primary mt-8 w-full">
                 Join the waitlist →
               </button>
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>

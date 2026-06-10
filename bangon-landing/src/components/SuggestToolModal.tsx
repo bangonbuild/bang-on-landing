@@ -59,17 +59,18 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
               className="modal-overlay"
               onClick={onClose}
             />
-            <motion.div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="suggest-tool-title"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-              className="modal-card max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="modal-shell">
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="suggest-tool-title"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+                className="modal-card max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
               <button
                 type="button"
                 onClick={onClose}
@@ -152,7 +153,8 @@ export function SuggestToolModal({ open, onClose }: SuggestToolModalProps) {
                   </form>
                 </>
               )}
-            </motion.div>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
