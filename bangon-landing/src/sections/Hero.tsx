@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { SectionLabel } from '../components/SectionLabel'
 import { PhoneMockup } from '../components/PhoneMockup'
 import { WaitlistForm } from '../components/WaitlistForm'
 import { fadeUp, fadeUpTransition } from '../motion'
@@ -15,14 +14,10 @@ export function Hero() {
             transition={{ staggerChildren: 0.08 }}
             className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left"
           >
-            <motion.div variants={fadeUp} transition={fadeUpTransition}>
-              <SectionLabel>BUILT FOR THE BUILT ENVIRONMENT</SectionLabel>
-            </motion.div>
-
             <motion.div
               variants={fadeUp}
               transition={fadeUpTransition}
-              className="mt-6 flex flex-col gap-2"
+              className="flex flex-col gap-2"
             >
               <h1 className="text-hero text-white">datum.ai</h1>
               <p className="text-hero text-[var(--color-text-muted)]">
