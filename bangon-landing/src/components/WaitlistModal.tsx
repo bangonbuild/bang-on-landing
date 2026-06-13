@@ -6,9 +6,10 @@ import { WaitlistForm } from './WaitlistForm'
 interface WaitlistModalProps {
   open: boolean
   onClose: () => void
+  planNote?: string
 }
 
-export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
+export function WaitlistModal({ open, onClose, planNote }: WaitlistModalProps) {
   if (!open) return null
 
   return (
@@ -35,32 +36,35 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
                 transition={{ duration: 0.2 }}
                 className="modal-card"
               >
-              <button
-                type="button"
-                onClick={onClose}
-                className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5 text-[var(--color-text-muted)]" strokeWidth={1.5} />
-              </button>
-              <h2 id="waitlist-title" className="text-heading pr-10 text-white">
-                Be first on site.
-              </h2>
-              <p className="text-body mt-4 text-[var(--color-text-muted)]">
-                datum.ai is coming to iPhone and Android. Join the waitlist, get the first 3
-                months free, and help shape what we build next.
-              </p>
-              <div className="mt-8">
-                <WaitlistForm
-                  variant="modal"
-                  className="mx-0 max-w-none"
-                  onSuccess={onClose}
-                  autoCloseMs={2500}
-                />
-              </div>
-              <p className="text-body mt-4 text-center text-[13px] text-[var(--color-text-muted)]">
-                Free for your first 3 months. No spam. No credit card.
-              </p>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center"
+                  aria-label="Close"
+                >
+                  <X className="h-5 w-5 text-[var(--color-text-muted)]" strokeWidth={1.5} />
+                </button>
+                <h2
+                  id="waitlist-title"
+                  className="pr-10 font-[family-name:var(--font-display)] text-[22px] font-semibold text-white"
+                >
+                  Be first on site.
+                </h2>
+                <p className="text-body mt-4 text-[var(--color-text-muted)]">
+                  datum.ai is coming to iPhone and Android. Join the waitlist, get the first 3
+                  months free, and help shape what we build next.
+                </p>
+                <div className="mt-8">
+                  <WaitlistForm
+                    variant="modal"
+                    planNote={planNote}
+                    onSuccess={onClose}
+                    autoCloseMs={2500}
+                  />
+                </div>
+                <p className="text-small mt-4 text-center text-[var(--color-text-muted)]">
+                  Free for your first 3 months. No spam. No credit card.
+                </p>
               </motion.div>
             </div>
           </>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { ArrowUp } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 
-const API_URL = 'https://bang-on-v3.vercel.app/api/ai'
+const API_URL = 'https://datum-app.vercel.app/api/ai'
 
 type Message = {
   id: string
@@ -20,20 +20,20 @@ const SEED_MESSAGES: Message[] = [
   {
     id: 'seed-2',
     role: 'user',
-    content: 'Can I notch the middle of a floor joist?',
+    content: 'Screw length for fixing corro to timber purlins?',
   },
   {
     id: 'seed-3',
     role: 'nudge',
     content:
-      "Nah, don't do it. The middle third is the high-stress zone. Notching there can cause failure under load. Stay in the outer quarters, and keep the depth under one-sixth of the joist depth. Check AS 1684.2 for your specific member size.",
+      'For corrugated iron to timber purlins, use **Class 3 hex head screws** — 65mm is standard for most profiles. Make sure you\'re going through the crest of the corrugation, not the valley. Use neoprene washers to seal the penetration. If you\'re in a coastal area, step up to Class 4.',
   },
 ]
 
 const SUGGESTED_PROMPTS = [
   'Which codes are you across?',
   "When's the best time for smoko?",
-  'Screw length for fixing corro?',
+  "What's the minimum bearer size for a deck?",
 ]
 
 const MAX_VISIBLE = 12
@@ -131,9 +131,7 @@ export function NudgeDemo({ layout = 'embedded' }: NudgeDemoProps) {
       }
 
       setMessages((prev) =>
-        prev.map((m) =>
-          m.id === assistantId ? { ...m, streaming: false } : m,
-        ),
+        prev.map((m) => (m.id === assistantId ? { ...m, streaming: false } : m)),
       )
     } catch {
       setError('Nudge is taking a breather. Try again in a sec.')
@@ -215,7 +213,7 @@ export function NudgeDemo({ layout = 'embedded' }: NudgeDemoProps) {
         <button
           key={prompt}
           type="button"
-          onClick={() => void sendMessage(prompt)}
+          onClick={() => setInput(prompt)}
           disabled={loading}
           className="text-body min-h-[44px] rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-3 text-left text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-2)] disabled:opacity-50"
         >

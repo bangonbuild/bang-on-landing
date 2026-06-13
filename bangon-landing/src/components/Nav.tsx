@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
 const navLinks = [
-  { label: 'Ask Nudge', href: '#nudge' },
-  { label: 'Snap', href: '#snap' },
+  { label: 'Nudge', href: '#nudge' },
+  { label: 'Toolkit', href: '#toolkit' },
   { label: 'Jobs', href: '#jobs' },
   { label: 'Money', href: '#money' },
-  { label: 'Toolbox', href: '#toolbox' },
+  { label: 'Crew', href: '#crew' },
 ]
 
 interface NavProps {
@@ -24,14 +24,17 @@ export function Nav({ onPricingClick, onWaitlistClick }: NavProps) {
   }, [])
 
   return (
-    <header className="site-nav fixed top-0 left-0 right-0 z-50 w-full">
+    <header className="site-nav w-full">
       <nav
         className={`nav-bar flex h-[72px] w-full items-center border-b ${
           scrolled ? 'nav-bar-scrolled' : 'nav-bar-top'
         }`}
       >
         <div className="site-container flex h-full w-full items-center justify-between gap-4">
-          <a href="#" className="text-body shrink-0 font-semibold text-white">
+          <a
+            href="#"
+            className="shrink-0 font-[family-name:var(--font-display)] text-[18px] font-semibold text-white"
+          >
             datum.ai
           </a>
 
@@ -43,7 +46,7 @@ export function Nav({ onPricingClick, onWaitlistClick }: NavProps) {
             ))}
           </div>
 
-          <div className="flex shrink-0 items-center gap-2 md:gap-3">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
               onClick={onPricingClick}

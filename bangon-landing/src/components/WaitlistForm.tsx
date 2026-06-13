@@ -1,8 +1,9 @@
 import { useEffect, useState, type FormEvent } from 'react'
 
 interface WaitlistFormProps {
-  variant?: 'hero' | 'cta' | 'modal'
+  variant?: 'inline' | 'modal'
   className?: string
+  planNote?: string
   onSuccess?: () => void
   autoCloseMs?: number
 }
@@ -10,8 +11,9 @@ interface WaitlistFormProps {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function WaitlistForm({
-  variant = 'hero',
+  variant = 'inline',
   className = '',
+  planNote,
   onSuccess,
   autoCloseMs,
 }: WaitlistFormProps) {
@@ -40,10 +42,9 @@ export function WaitlistForm({
     }
     setStatus('loading')
     setErrorMsg('')
-    // TODO: POST to /api/waitlist or Mailchimp API
-    window.setTimeout(() => {
-      setStatus('success')
-    }, 800)
+    // TODO: wire to Mailchimp / Resend
+    void planNote
+    window.setTimeout(() => setStatus('success'), 800)
   }
 
   if (status === 'success') {
@@ -57,32 +58,30 @@ export function WaitlistForm({
   if (variant === 'modal') {
     return (
       <form onSubmit={handleSubmit} className={`flex w-full min-w-0 flex-col gap-2 ${className}`}>
-        <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch">
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => {
-              setFirstName(e.target.value)
-              if (status === 'error') setStatus('idle')
-            }}
-            placeholder="First name"
-            disabled={status === 'loading'}
-            className="waitlist-input"
-            aria-label="First name"
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value)
-              if (status === 'error') setStatus('idle')
-            }}
-            placeholder="Email address"
-            disabled={status === 'loading'}
-            className="waitlist-input"
-            aria-label="Email address"
-          />
-        </div>
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => {
+            setFirstName(e.target.value)
+            if (status === 'error') setStatus('idle')
+          }}
+          placeholder="First name"
+          disabled={status === 'loading'}
+          className="waitlist-input"
+          aria-label="First name"
+        />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            if (status === 'error') setStatus('idle')
+          }}
+          placeholder="Email address"
+          disabled={status === 'loading'}
+          className="waitlist-input"
+          aria-label="Email address"
+        />
         <button type="submit" disabled={status === 'loading'} className="btn-primary w-full">
           {status === 'loading' ? 'Joining...' : 'Join the waitlist →'}
         </button>
@@ -93,12 +92,10 @@ export function WaitlistForm({
     )
   }
 
-  const isStacked = variant === 'hero'
-
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex w-full min-w-0 flex-col gap-2 ${isStacked ? '' : 'mx-auto'} sm:flex-row sm:items-stretch ${className}`}
+      className={`flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch ${className}`}
     >
       <input
         type="text"
