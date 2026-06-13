@@ -56,7 +56,7 @@ export function PricingSection({ onJoinWaitlist }: PricingSectionProps) {
           whileInView="visible"
           viewport={viewportOnce}
           transition={{ staggerChildren: 0.08 }}
-          className="flex flex-col items-center text-center"
+          className="flex flex-col items-start text-left"
         >
           <motion.div variants={fadeUp} transition={fadeUpTransition}>
             <SectionLabel>PRICING</SectionLabel>

@@ -12,7 +12,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.08 }}
-            className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left"
+            className="flex min-w-0 flex-col items-start text-left"
           >
             <motion.div
               variants={fadeUp}
@@ -59,7 +59,7 @@ export function Hero() {
             animate="visible"
             transition={fadeUpTransition}
             variants={fadeUp}
-            className="hidden justify-center lg:flex"
+            className="hidden justify-start lg:flex"
           >
             <PhoneMockup />
           </motion.div>

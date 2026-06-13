@@ -236,7 +236,7 @@ export function NudgeDemo({ layout = 'embedded' }: NudgeDemoProps) {
   }
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-[560px]">
+    <div className="w-full min-w-0 max-w-[560px]">
       {chatArea}
       {error && <p className="text-body mb-3 text-[var(--color-text-muted)]">{error}</p>}
       {inputBar}

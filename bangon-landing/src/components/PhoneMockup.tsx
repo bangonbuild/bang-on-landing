@@ -10,7 +10,7 @@ export function PhoneMockup({
   className = '',
 }: PhoneMockupProps) {
   return (
-    <div className={`mx-auto w-full max-w-[260px] ${className}`}>
+    <div className={`w-full max-w-[260px] ${className}`}>
       {/* TODO: replace with real screenshot */}
       <div
         className="flex h-[500px] w-full flex-col items-center justify-center rounded-[36px] border-2 border-[var(--color-border-2)] bg-[var(--color-surface)]"

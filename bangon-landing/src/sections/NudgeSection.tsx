@@ -25,7 +25,7 @@ export function NudgeSection({ onTryNudge }: NudgeSectionProps) {
           whileInView="visible"
           viewport={viewportOnce}
           transition={{ staggerChildren: 0.08 }}
-          className="flex flex-col items-center text-center"
+          className="flex flex-col items-start text-left"
         >
           <motion.div variants={fadeUp} transition={fadeUpTransition}>
             <SectionLabel>MEET NUDGE</SectionLabel>
@@ -52,7 +52,7 @@ export function NudgeSection({ onTryNudge }: NudgeSectionProps) {
           <motion.div
             variants={fadeUp}
             transition={fadeUpTransition}
-            className="mt-8 w-full max-w-[480px] text-left"
+            className="mt-8 w-full max-w-[480px]"
           >
             <FeatureList items={features} />
           </motion.div>

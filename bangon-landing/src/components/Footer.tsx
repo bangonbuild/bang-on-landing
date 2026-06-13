@@ -31,7 +31,7 @@ export function Footer() {
           </p>
         </div>
 
-        <nav className="text-small flex flex-wrap items-center gap-6 text-[var(--color-text-dim)] md:justify-center">
+        <nav className="text-small flex flex-wrap items-center gap-6 text-[var(--color-text-dim)]">
           <a href="#" className="min-h-[44px] transition-colors hover:text-[var(--color-text-muted)]">
             Privacy
           </a>
@@ -51,7 +51,7 @@ export function Footer() {
           </a>
         </nav>
 
-        <p className="text-small text-[var(--color-text-muted)] md:text-right">
+        <p className="text-small text-[var(--color-text-muted)]">
           © 2026 datum.ai. All rights reserved.
         </p>
       </div>

@@ -62,7 +62,7 @@ export function WaitlistModal({ open, onClose, planNote }: WaitlistModalProps) {
                     autoCloseMs={2500}
                   />
                 </div>
-                <p className="text-small mt-4 text-center text-[var(--color-text-muted)]">
+                <p className="text-small mt-4 text-left text-[var(--color-text-muted)]">
                   Free for your first 3 months. No spam. No credit card.
                 </p>
               </motion.div>

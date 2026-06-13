@@ -49,7 +49,7 @@ export function WaitlistForm({
 
   if (status === 'success') {
     return (
-      <p className={`text-body text-center text-[var(--color-success)] ${className}`}>
+      <p className={`text-body text-left text-[var(--color-success)] ${className}`}>
         You&apos;re on the list. We&apos;ll be in touch.
       </p>
     )
