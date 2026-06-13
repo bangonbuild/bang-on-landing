@@ -5,14 +5,14 @@ import { fadeUp, fadeUpTransition } from '../motion'
 
 export function Hero() {
   return (
-    <section className="section-padding flex min-h-screen items-center pt-[72px]">
+    <section className="section-padding flex min-h-screen items-start pt-[72px] md:items-center">
       <div className="site-container w-full">
         <div className="grid min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-[55%_45%] lg:gap-16">
           <motion.div
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.08 }}
-            className="flex min-w-0 flex-col items-start text-left"
+            className="flex min-w-0 flex-col items-start pt-24 text-left md:pt-0"
           >
             <motion.div
               variants={fadeUp}
