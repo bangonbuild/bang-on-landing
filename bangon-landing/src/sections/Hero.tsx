@@ -20,7 +20,7 @@ export function Hero() {
               className="flex flex-col gap-2"
             >
               <h1 className="text-hero text-white">datum.ai</h1>
-              <p className="text-hero text-[var(--color-text-muted)]">
+              <p className="text-display text-[var(--color-text-muted)]">
                 The operating system for the built environment.
               </p>
             </motion.div>
