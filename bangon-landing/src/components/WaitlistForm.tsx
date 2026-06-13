@@ -97,30 +97,32 @@ export function WaitlistForm({
       onSubmit={handleSubmit}
       className={`flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch ${className}`}
     >
-      <input
-        type="text"
-        value={firstName}
-        onChange={(e) => {
-          setFirstName(e.target.value)
-          if (status === 'error') setStatus('idle')
-        }}
-        placeholder="First name"
-        disabled={status === 'loading'}
-        className="waitlist-input"
-        aria-label="First name"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value)
-          if (status === 'error') setStatus('idle')
-        }}
-        placeholder="Email address"
-        disabled={status === 'loading'}
-        className="waitlist-input"
-        aria-label="Email address"
-      />
+      <div className="flex min-w-0 gap-2 sm:contents">
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => {
+            setFirstName(e.target.value)
+            if (status === 'error') setStatus('idle')
+          }}
+          placeholder="First name"
+          disabled={status === 'loading'}
+          className="waitlist-input min-w-0 flex-1"
+          aria-label="First name"
+        />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            if (status === 'error') setStatus('idle')
+          }}
+          placeholder="Email address"
+          disabled={status === 'loading'}
+          className="waitlist-input min-w-0 flex-1"
+          aria-label="Email address"
+        />
+      </div>
       <button
         type="submit"
         disabled={status === 'loading'}
